@@ -17,12 +17,17 @@ class Executor:
     def buy(self, symbol: str, quantity: int, price: float = None):
         """买入订单"""
         print(f"买入 {quantity} 股 {symbol} @ {price or 'market'}")
-        return {"order_id": "BUY001", "status": "submitted"}
+        return self
     
     def sell(self, symbol: str, quantity: int, price: float = None):
         """卖出订单"""
         print(f"卖出 {quantity} 股 {symbol} @ {price or 'market'}")
-        return {"order_id": "SELL001", "status": "submitted"}
+        return self
+    
+    def submit_order(self, action: str, symbol: str, quantity: int, price: float = None):
+        """提交订单并返回结果"""
+        print(f"{action} {quantity} 股 {symbol} @ {price or 'market'}")
+        return {"order_id": f"{action}001", "status": "submitted"}
     
     def get_positions(self):
         """获取当前持仓"""
