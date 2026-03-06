@@ -4,7 +4,7 @@
 提供常用技术指标的计算函数，供策略使用。
 
 @module: strategy.indicators
-@author: TradeFlow AI Team
+@author: OpenFinAgent Team
 @version: 2.0.0
 """
 

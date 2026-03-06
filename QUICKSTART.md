@@ -1,4 +1,4 @@
-# TradeFlow AI 快速使用指南
+# OpenFinAgent 快速使用指南
 
 ## ⚡ 30 秒快速体验
 

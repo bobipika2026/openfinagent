@@ -1,4 +1,4 @@
-# TradeFlow AI 文档图片
+# OpenFinAgent 文档图片
 
 此目录用于存放文档中引用的截图和图表。
 

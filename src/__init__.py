@@ -1,5 +1,5 @@
 """
-TradeFlow AI - AI 量化交易助手
+OpenFinAgent - AI 量化交易助手
 
 用自然语言写量化策略
 
@@ -14,7 +14,7 @@ TradeFlow AI - AI 量化交易助手
 """
 
 __version__ = "2.0.0"
-__author__ = "TradeFlow Team"
+__author__ = "OpenFinAgent Team"
 
 # 策略模块
 from .strategy import (

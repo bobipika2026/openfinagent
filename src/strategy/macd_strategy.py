@@ -9,7 +9,7 @@ MACD 策略 - 移动平均收敛发散策略
 - 可结合 Histogram 确认信号强度
 
 @module: strategy.macd_strategy
-@author: TradeFlow AI Team
+@author: OpenFinAgent Team
 @version: 1.0.0
 """
 

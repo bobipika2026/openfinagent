@@ -1,4 +1,4 @@
-# TradeFlow AI 文档完成总结
+# OpenFinAgent 文档完成总结
 
 ## 📋 任务完成情况
 
@@ -294,4 +294,4 @@ tradeflow-ai/
 
 **文档体系建设完成！** 🎉
 
-感谢使用 TradeFlow AI 文档！
+感谢使用 OpenFinAgent 文档！

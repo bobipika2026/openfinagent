@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-TradeFlow AI 安装脚本
+OpenFinAgent 安装脚本
 """
 
 from setuptools import setup, find_packages
@@ -18,7 +18,7 @@ requirements = [r.strip() for r in requirements if r.strip() and not r.startswit
 setup(
     name="tradeflow-ai",
     version="0.1.0",
-    author="TradeFlow Team",
+    author="OpenFinAgent Team",
     author_email="tradeflow@example.com",
     description="AI 量化交易助手 - 用自然语言写量化策略",
     long_description=long_description,

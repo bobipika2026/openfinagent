@@ -3,7 +3,7 @@
 """
 全策略对比演示
 
-演示如何使用 TradeFlow AI 进行：
+演示如何使用 OpenFinAgent 进行：
 1. 多策略对比回测
 2. 策略参数优化
 3. 批量回测
@@ -341,9 +341,9 @@ def demo_natural_language():
 def main():
     """主函数"""
     print("\n" + "="*70)
-    print("🚀 TradeFlow AI - 全功能演示")
+    print("🚀 OpenFinAgent - 全功能演示")
     print("="*70)
-    print("\n本演示展示 TradeFlow AI 的核心功能:")
+    print("\n本演示展示 OpenFinAgent 的核心功能:")
     print("  1. 多策略对比回测")
     print("  2. 策略参数优化")
     print("  3. 批量回测")

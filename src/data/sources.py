@@ -9,7 +9,7 @@
 - 模拟数据
 
 @module: data.sources
-@author: TradeFlow AI Team
+@author: OpenFinAgent Team
 @version: 1.0.0
 """
 

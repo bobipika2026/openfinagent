@@ -1,4 +1,4 @@
-# TradeFlow AI 技术栈
+# OpenFinAgent 技术栈
 
 **版本**: v1.0  
 **最后更新**: 2026-03-06

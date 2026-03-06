@@ -10,7 +10,7 @@
 - 价格从中轨上方跌破中轨 → 卖出信号 (趋势突破)
 
 @module: strategy.bollinger_strategy
-@author: TradeFlow AI Team
+@author: OpenFinAgent Team
 @version: 1.0.0
 """
 

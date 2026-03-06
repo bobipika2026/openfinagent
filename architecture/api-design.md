@@ -1,4 +1,4 @@
-# TradeFlow AI API 设计
+# OpenFinAgent API 设计
 
 **版本**: v1.0  
 **最后更新**: 2026-03-06
@@ -508,7 +508,7 @@ output:
 
 ```python
 from tradeflow.exceptions import (
-    TradeFlowError,        # 基类异常
+    OpenFinAgentError,        # 基类异常
     DataError,             # 数据错误
     StrategyError,         # 策略错误
     BacktestError,         # 回测错误

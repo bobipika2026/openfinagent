@@ -1,4 +1,4 @@
-# TradeFlow AI 项目总结
+# OpenFinAgent 项目总结
 
 ## 📁 项目文件列表
 

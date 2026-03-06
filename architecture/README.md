@@ -1,6 +1,6 @@
-# TradeFlow AI 架构文档
+# OpenFinAgent 架构文档
 
-本目录包含 TradeFlow AI 项目的完整技术架构设计文档。
+本目录包含 OpenFinAgent 项目的完整技术架构设计文档。
 
 ## 📁 文档列表
 
@@ -46,4 +46,4 @@
 
 ---
 
-*TradeFlow AI - 用自然语言写量化策略*
+*OpenFinAgent - 用自然语言写量化策略*

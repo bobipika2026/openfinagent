@@ -9,7 +9,7 @@ RSI 策略 - 相对强弱指数策略
 - 可配置阈值和持仓周期
 
 @module: strategy.rsi_strategy
-@author: TradeFlow AI Team
+@author: OpenFinAgent Team
 @version: 1.0.0
 """
 

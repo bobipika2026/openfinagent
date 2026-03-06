@@ -1,6 +1,6 @@
-# TradeFlow AI 文档中心
+# OpenFinAgent 文档中心
 
-欢迎使用 TradeFlow AI 文档中心！这里包含了完整的使用指南、教程和参考文档。
+欢迎使用 OpenFinAgent 文档中心！这里包含了完整的使用指南、教程和参考文档。
 
 ---
 

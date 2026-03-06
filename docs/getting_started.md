@@ -1,6 +1,6 @@
-# TradeFlow AI 快速入门
+# OpenFinAgent 快速入门
 
-欢迎使用 TradeFlow AI！本指南将帮助你在 **10 分钟内** 开始第一个量化策略回测。
+欢迎使用 OpenFinAgent！本指南将帮助你在 **10 分钟内** 开始第一个量化策略回测。
 
 ---
 
@@ -157,7 +157,7 @@ python 01_a_stock_backtest.py
 
 ### 策略 (Strategy)
 
-策略是交易规则的定义。TradeFlow AI 提供两种创建方式：
+策略是交易规则的定义。OpenFinAgent 提供两种创建方式：
 
 #### 1. 自然语言创建
 
@@ -265,7 +265,7 @@ print(results.metrics)
 
 ### Q1: 如何获取真实股票数据？
 
-**A**: TradeFlow AI 支持多种数据源：
+**A**: OpenFinAgent 支持多种数据源：
 
 ```python
 # A 股数据（AKShare - 免费）

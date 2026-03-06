@@ -10,7 +10,7 @@ import sys
 sys.path.insert(0, './src')
 
 print("="*70)
-print("🔍 TradeFlow AI 安装验证")
+print("🔍 OpenFinAgent 安装验证")
 print("="*70)
 
 # 测试 1: 导入核心模块

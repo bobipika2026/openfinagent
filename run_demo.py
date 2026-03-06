@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-TradeFlow AI 快速演示
+OpenFinAgent 快速演示
 
-运行此脚本快速体验 TradeFlow AI 的核心功能
+运行此脚本快速体验 OpenFinAgent 的核心功能
 """
 
 import sys
@@ -24,7 +24,7 @@ from backtest.engine import BacktestEngine, load_data
 def demo():
     """运行演示"""
     print("\n" + "=" * 70)
-    print("🚀 TradeFlow AI 快速演示")
+    print("🚀 OpenFinAgent 快速演示")
     print("=" * 70)
 
     # 1. 创建策略

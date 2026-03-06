@@ -1,4 +1,4 @@
-# TradeFlow AI 常见问题 (FAQ)
+# OpenFinAgent 常见问题 (FAQ)
 
 本文档收集了用户常见问题和解答。
 
@@ -44,7 +44,7 @@ pip install pandas numpy matplotlib jieba tqdm
 
 ### Q2: 支持哪些 Python 版本？
 
-**A**: TradeFlow AI 支持 Python 3.9 及以上版本。
+**A**: OpenFinAgent 支持 Python 3.9 及以上版本。
 
 ```bash
 # 检查 Python 版本
@@ -229,7 +229,7 @@ results.plot(save_path='backtest_result.png')
 
 ### Q13: 如何获取真实股票数据？
 
-**A**: TradeFlow AI 支持多种数据源：
+**A**: OpenFinAgent 支持多种数据源：
 
 ```python
 # A 股数据（AKShare - 免费）
@@ -450,7 +450,7 @@ pip install -r requirements.txt --upgrade
 
 ### Q29: 商业使用需要授权吗？
 
-**A**: TradeFlow AI 使用 MIT 许可证，允许免费商业使用。
+**A**: OpenFinAgent 使用 MIT 许可证，允许免费商业使用。
 
 ### Q30: 有学习资源推荐吗？
 

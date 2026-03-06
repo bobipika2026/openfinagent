@@ -1,4 +1,4 @@
-# TradeFlow AI Roadmap 🚀
+# OpenFinAgent Roadmap 🚀
 
 **最后更新**: 2026-03-06
 **愿景**: GitHub 金融科技 Top 10 Stars

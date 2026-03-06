@@ -1,6 +1,6 @@
 # 教程 2: 创建自定义策略
 
-在本教程中，你将学习如何创建 TradeFlow AI 内置策略之外的自定义策略。
+在本教程中，你将学习如何创建 OpenFinAgent 内置策略之外的自定义策略。
 
 ---
 
@@ -22,7 +22,7 @@
 
 完成本教程后，你将能够：
 
-- ✅ 理解 TradeFlow AI 的策略架构
+- ✅ 理解 OpenFinAgent 的策略架构
 - ✅ 继承 `BaseStrategy` 创建自定义策略
 - ✅ 实现 `on_bar()` 方法定义交易逻辑
 - ✅ 使用技术指标生成交易信号
@@ -46,7 +46,7 @@
 
 ### BaseStrategy 结构
 
-TradeFlow AI 的所有策略都继承自 `BaseStrategy` 基类：
+OpenFinAgent 的所有策略都继承自 `BaseStrategy` 基类：
 
 ```python
 from tradeflow.strategy import BaseStrategy

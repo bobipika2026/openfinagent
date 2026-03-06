@@ -1,6 +1,6 @@
-# TradeFlow AI 策略语法参考
+# OpenFinAgent 策略语法参考
 
-本文档详细介绍 TradeFlow AI 支持的自然语言策略语法。
+本文档详细介绍 OpenFinAgent 支持的自然语言策略语法。
 
 ---
 
@@ -17,7 +17,7 @@
 
 ## 基础语法
 
-TradeFlow AI 使用**自然语言解析技术**，将中文策略描述转换为可执行的策略代码。
+OpenFinAgent 使用**自然语言解析技术**，将中文策略描述转换为可执行的策略代码。
 
 ### 基本结构
 
@@ -43,7 +43,7 @@ TradeFlow AI 使用**自然语言解析技术**，将中文策略描述转换为
 
 ## 策略类型
 
-TradeFlow AI 支持以下策略类型：
+OpenFinAgent 支持以下策略类型：
 
 ### 1. 均线交叉策略 (MA Cross)
 

@@ -9,7 +9,7 @@
 - 风险预算管理
 
 @module: risk.control
-@author: TradeFlow AI Team
+@author: OpenFinAgent Team
 @version: 1.0.0
 """
 

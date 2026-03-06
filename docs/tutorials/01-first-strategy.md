@@ -1,6 +1,6 @@
 # 教程 1: 创建你的第一个量化策略
 
-欢迎来到 TradeFlow AI！本教程将带你从零开始，在 10 分钟内创建并回测第一个量化交易策略。
+欢迎来到 OpenFinAgent！本教程将带你从零开始，在 10 分钟内创建并回测第一个量化交易策略。
 
 ---
 
@@ -21,7 +21,7 @@
 
 完成本教程后，你将能够：
 
-- ✅ 理解 TradeFlow AI 的基本工作流程
+- ✅ 理解 OpenFinAgent 的基本工作流程
 - ✅ 用自然语言描述交易策略
 - ✅ 运行策略回测
 - ✅ 解读回测结果和性能指标
@@ -34,12 +34,12 @@
 ### 环境要求
 
 - Python 3.9 或更高版本
-- 已安装 TradeFlow AI 及依赖
+- 已安装 OpenFinAgent 及依赖
 
 ### 检查安装
 
 ```bash
-# 验证 TradeFlow AI 是否安装成功
+# 验证 OpenFinAgent 是否安装成功
 python -c "from tradeflow import StrategyBuilder; print('✅ 安装成功！')"
 ```
 

@@ -1,6 +1,6 @@
 # 贡献指南
 
-首先，感谢你愿意为 TradeFlow AI 做出贡献！🎉
+首先，感谢你愿意为 OpenFinAgent 做出贡献！🎉
 
 本指南将帮助你了解如何参与项目贡献，包括报告问题、提交代码、改进文档等。
 
@@ -23,7 +23,7 @@
 
 ## 行为准则
 
-在参与 TradeFlow AI 社区时，请遵守以下准则：
+在参与 OpenFinAgent 社区时，请遵守以下准则：
 
 - 🤝 **友好包容**: 尊重不同背景、观点和经验的人
 - 💬 **建设性沟通**: 提出批评时请提供改进建议
@@ -299,7 +299,7 @@ git push origin feature/your-feature-name
 ### 环境信息
 - Python 版本：3.9.7
 - 操作系统：Ubuntu 20.04
-- TradeFlow AI 版本：0.1.0
+- OpenFinAgent 版本：0.1.0
 
 ### 错误信息
 ```
@@ -528,7 +528,7 @@ A: 欢迎提议！请先在 Issue 中讨论，确保符合项目定位。
 
 ## 贡献者列表
 
-感谢所有为 TradeFlow AI 做出贡献的开发者！
+感谢所有为 OpenFinAgent 做出贡献的开发者！
 
 <!-- 使用 all-contributors 自动更新 -->
 <!-- ALL-CONTRIBUTORS-LIST:START -->

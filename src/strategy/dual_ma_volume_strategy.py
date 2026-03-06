@@ -9,7 +9,7 @@
 - 成交量确认：当前成交量 > N 日均量 * 倍数
 
 @module: strategy.dual_ma_volume_strategy
-@author: TradeFlow AI Team
+@author: OpenFinAgent Team
 @version: 1.0.0
 """
 

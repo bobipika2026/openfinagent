@@ -8,7 +8,7 @@
 - 回测结果汇总分析
 
 @module: backtest.batch
-@author: TradeFlow AI Team
+@author: OpenFinAgent Team
 @version: 1.0.0
 """
 

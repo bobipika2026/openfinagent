@@ -8,7 +8,7 @@
 - 过拟合检测
 
 @module: optimization.optimizer
-@author: TradeFlow AI Team
+@author: OpenFinAgent Team
 @version: 1.0.0
 """
 

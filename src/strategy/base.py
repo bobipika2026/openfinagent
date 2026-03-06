@@ -2,7 +2,7 @@
 策略基类 - 所有策略的父类
 
 @module: strategy.base
-@author: TradeFlow AI Team
+@author: OpenFinAgent Team
 @version: 2.0.0
 """
 

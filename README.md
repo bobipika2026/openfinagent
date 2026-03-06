@@ -1,7 +1,5 @@
 # OpenFinAgent 🚀
 
-> **项目名称已更新**: TradeFlow AI → OpenFinAgent
-
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Version](https://img.shields.io/badge/version-0.2.0-green.svg)](https://github.com/bobipika2026/openfinagent)
@@ -30,9 +28,9 @@
 
 ## 📖 项目简介
 
-TradeFlow AI 是一个**革命性的量化交易开发平台**，让没有编程背景的交易者也能轻松创建量化策略。
+OpenFinAgent 是一个**革命性的量化交易开发平台**，让没有编程背景的交易者也能轻松创建量化策略。
 
-传统的量化交易需要掌握编程、数据处理、回测框架等复杂技能。TradeFlow AI 通过**自然语言处理技术**，让你只需用中文描述交易规则，AI 就会自动将其转换为可执行的策略代码，并提供专业的回测和可视化分析。
+传统的量化交易需要掌握编程、数据处理、回测框架等复杂技能。OpenFinAgent 通过**自然语言处理技术**，让你只需用中文描述交易规则，AI 就会自动将其转换为可执行的策略代码，并提供专业的回测和可视化分析。
 
 ### 🎯 适用人群
 
@@ -273,7 +271,7 @@ tradeflow-ai/
 
 ### 贡献者
 
-感谢所有为 TradeFlow AI 做出贡献的开发者！
+感谢所有为 OpenFinAgent 做出贡献的开发者！
 
 ---
 
