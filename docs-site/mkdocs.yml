@@ -96,26 +96,32 @@ markdown_extensions:
 
 # 导航结构
 nav:
-  - 首页: index.md
-  - 快速开始: getting-started.md
+  - 首页：index.md
+  - 快速开始：getting-started.md
+  - 📢 v0.3.0 新特性：v0.3-whats-new.md
   - 策略文档:
     - strategies/index.md
-    - 双均线策略: strategies/dual-ma.md
-    - 动量策略: strategies/momentum.md
-    - 均值回归策略: strategies/mean-reversion.md
-    - 网格交易策略: strategies/grid-trading.md
-    - 机器学习策略: strategies/ml-strategy.md
-    - 深度学习策略: strategies/deep-learning.md
+    - 双均线策略：strategies/dual-ma.md
+    - 动量策略：strategies/momentum.md
+    - 均值回归策略：strategies/mean-reversion.md
+    - 网格交易策略：strategies/grid-trading.md
+    - 机器学习策略：strategies/ml-strategy.md
+    - 深度学习策略：strategies/deep-learning.md
+  - 使用指南:
+    - guides/binance-data.md - Binance 数据源
+    - guides/tushare-data.md - Tushare 数据源
+    - guides/optimizer.md - 优化器使用指南
   - API 参考:
     - api/index.md
-    - 交易接口: api/trading.md
-    - 数据接口: api/data.md
-    - 策略接口: api/strategy.md
+    - 交易接口：api/trading.md
+    - 数据接口：api/data.md
+    - 策略接口：api/strategy.md
   - 教程:
     - tutorials/index.md
-    - 第一个策略: tutorials/first-strategy.md
-    - 回测实战: tutorials/backtesting.md
-    - 实盘部署: tutorials/live-trading.md
+    - 第一个策略：tutorials/first-strategy.md
+    - 回测实战：tutorials/backtesting.md
+    - 实盘部署：tutorials/live-trading.md
+  - 📝 更新日志：changelog.md
   - FAQ: faq.md
 
 # 自定义 CSS

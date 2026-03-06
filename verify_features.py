@@ -63,6 +63,7 @@ def test_binance_source():
     print("=" * 60)
     
     try:
+        from data.binance_source import BinanceDataSource
         source = BinanceDataSource()
         print(f"✓ BinanceDataSource 初始化成功")
         print(f"  - Base URL: {source.base_url}")
@@ -88,6 +89,7 @@ def test_genetic_optimizer():
     print("=" * 60)
     
     try:
+        from optimization.genetic_optimizer import GeneticOptimizer, ParameterBound
         optimizer = GeneticOptimizer(
             population_size=20,
             generations=10,
@@ -123,6 +125,7 @@ def test_heatmap():
     print("=" * 60)
     
     try:
+        from visualization.heatmap import ParameterHeatmap
         heatmap = ParameterHeatmap(metric_name='sharpe_ratio')
         print(f"✓ ParameterHeatmap 初始化成功")
         print(f"  - 目标指标：{heatmap.metric_name}")
@@ -143,6 +146,7 @@ def test_optimized_engine():
     print("=" * 60)
     
     try:
+        from backtest.optimized_engine import OptimizedBacktestEngine
         engine = OptimizedBacktestEngine(
             initial_capital=100000,
             commission_rate=0.001,
