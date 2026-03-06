@@ -1,5 +1,10 @@
 # 教程集合
 
+> 🎥 **新增**：[视频教程](video-tutorials.md) 即将上线！  
+> 📢 **v0.3.0**：查看 [遗传算法优化器教程](../guides/optimizer.md)
+
+---
+
 本教程集合将带你从零开始学习 OpenFinAgent，逐步掌握量化交易的核心技能。
 
 ## 📚 教程列表
@@ -9,6 +14,7 @@
 | [第一个策略](first-strategy.md) | ⭐⭐ | 30 分钟 | 创建你的第一个交易策略 |
 | [回测实战](backtesting.md) | ⭐⭐⭐ | 60 分钟 | 学习回测和策略优化 |
 | [实盘部署](live-trading.md) | ⭐⭐⭐⭐ | 90 分钟 | 部署策略到实盘交易 |
+| [视频教程](video-tutorials.md) | ⭐⭐ | 多样 | 🎥 视频教学（即将上线）|
 
 ## 🎯 学习路径
 
@@ -51,6 +57,15 @@ python scripts/download_data.py
 
 完成基础教程后，可以学习：
 
+### v0.3.0 新增内容
+
+- 🧬 [遗传算法优化器](../guides/optimizer.md) - 智能参数优化
+- 📊 [Binance 数据源](../guides/binance-data.md) - 加密货币数据
+- ⏱️ [Tushare 分钟线](../guides/tushare-data.md) - A 股高精度数据
+- 📈 [参数热力图](../guides/optimizer.md#参数热力图) - 可视化分析
+
+### 策略进阶
+
 - [机器学习策略](../strategies/ml-strategy.md)
 - [深度学习策略](../strategies/deep-learning.md)
 - [多因子模型](../advanced/multi-factor.md)
@@ -63,7 +78,10 @@ python scripts/download_data.py
 1. 查看 [FAQ](../faq.md)
 2. 搜索 [GitHub Issues](https://github.com/bobipika2026/openfinagent/issues)
 3. 参与 [社区讨论](https://github.com/bobipika2026/openfinagent/discussions)
+4. 阅读 [博客文章](../blog/)
 
 ---
 
 _开始你的量化交易之旅！🚀_
+
+_最后更新：2026 年 3 月 6 日 | 当前版本：v0.3.0_

@@ -235,9 +235,6 @@ def test_genetic_optimizer():
             self.window = int(window)
             self.threshold = threshold
         
-        def generate_signal(self, data_row):
-            return 0
-        
         def generate_signals(self, data):
             signals = np.zeros(len(data), dtype=np.int8)
             if len(data) > self.window:
@@ -245,6 +242,10 @@ def test_genetic_optimizer():
                 signals[data['close'] > ma * (1 + self.threshold)] = 1
                 signals[data['close'] < ma * (1 - self.threshold)] = -1
             return signals
+        
+        def on_bar(self, data, index):
+            """每根 K 线回调"""
+            return None
     
     # 测试 3.1: 优化器初始化
     try:
@@ -385,6 +386,10 @@ def test_parameter_heatmap():
                 signals[data['close'] > ma * (1 + self.threshold)] = 1
                 signals[data['close'] < ma * (1 - self.threshold)] = -1
             return signals
+        
+        def on_bar(self, data, index):
+            """每根 K 线回调"""
+            return None
     
     # 测试 4.1: 热力图初始化
     try:
@@ -502,6 +507,10 @@ def test_optimized_engine():
                 signals[data['close'] > ma] = 1
                 signals[data['close'] < ma] = -1
             return signals
+        
+        def on_bar(self, data, index):
+            """每根 K 线回调"""
+            return None
     
     # 测试 5.1: 引擎初始化
     try:
