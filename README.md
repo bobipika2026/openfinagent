@@ -2,7 +2,8 @@
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-0.1.0-green.svg)](https://github.com/your-org/tradeflow-ai)
+[![Version](https://img.shields.io/badge/version-0.2.0-green.svg)](https://github.com/bobipika2026/openfinagent)
+[![Stars](https://img.shields.io/github/stars/bobipika2026/openfinagent)](https://github.com/bobipika2026/openfinagent)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 **AI 量化交易助手 - 用自然语言写量化策略**
