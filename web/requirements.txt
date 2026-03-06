@@ -1,10 +1,29 @@
-# Web UI 依赖
+# OpenFinAgent Web UI 依赖 (增强版 v0.3.2)
+
+# 核心框架
 streamlit>=1.28.0
+
+# 数据处理
 pandas>=2.0.0
 numpy>=1.24.0
+
+# 可视化
 matplotlib>=3.7.0
 plotly>=5.17.0
+kaleido>=0.2.1  # 图表导出为图片
 
-# 项目依赖
-akshare>=1.10.0
-tqdm>=4.65.0
+# PDF 导出
+reportlab>=4.0.0  # PDF 报告生成
+
+# 数据源
+akshare>=1.10.0  # A 股数据
+
+# 工具
+tqdm>=4.65.0  # 进度条
+Pillow>=10.0.0  # 图片处理
+
+# 可选：JavaScript 交互
+# streamlit-javascript>=0.1.5  # 主题切换等 JS 功能
+
+# 性能优化
+# cachetools>=5.3.0  # 缓存管理
