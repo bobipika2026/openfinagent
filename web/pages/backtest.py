@@ -1,5 +1,12 @@
 """
-回测页面 - 运行策略回测并展示结果
+回测页面 - 运行策略回测并展示结果 (增强版)
+
+功能增强:
+- ✅ 回测结果导出 (PDF/CSV/图片)
+- ✅ 更多图表类型 (K 线图)
+- ✅ 交互式图表
+- ✅ 数据缓存
+- ✅ 性能优化
 """
 
 import streamlit as st
@@ -8,16 +15,20 @@ from datetime import datetime, timedelta
 from pathlib import Path
 import sys
 
-# 添加项目根目录到路径
-project_root = Path(__file__).parent.parent.parent
+# 添加项目路径
+project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
+
+# 导入自定义组件和工具
+from components import render_header, create_equity_chart, create_drawdown_chart, create_radar_chart, create_kline_chart
+from utils import export_all_results, export_results_to_pdf, export_results_to_csv, cache
 
 
 def show():
     """显示回测页面"""
     
-    st.markdown('<p class="main-header">📈 回测分析</p>', unsafe_allow_html=True)
-    st.markdown('<p class="sub-header">选择股票和时间范围，运行策略回测</p>', unsafe_allow_html=True)
+    # 页面头部
+    render_header("📈 回测分析", "选择股票和时间范围，运行策略回测")
     
     st.divider()
     
@@ -30,7 +41,7 @@ def show():
         """)
         
         # 提供快速创建示例策略的选项
-        if st.button("✨ 快速创建示例策略"):
+        if st.button("✨ 快速创建示例策略", key="quick_create_strategy"):
             try:
                 from src.strategy.builder import StrategyBuilder
                 strategy = StrategyBuilder.create('ma_cross', short_window=5, long_window=20, initial_capital=100000)
@@ -104,6 +115,39 @@ def show():
         
         # 运行回测按钮
         run_button = st.button("▶️ 运行回测", use_container_width=True, type="primary")
+        
+        st.divider()
+        
+        # 导出选项
+        if 'current_backtest_results' in st.session_state:
+            st.markdown("### 📥 导出结果")
+            
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            
+            # CSV 导出
+            if st.button("📊 导出 CSV", use_container_width=True):
+                results = st.session_state['current_backtest_results']
+                csv_data = export_results_to_csv(results)
+                st.download_button(
+                    label="⬇️ 下载 CSV",
+                    data=csv_data,
+                    file_name=f"backtest_{timestamp}.csv",
+                    mime="text/csv",
+                    use_container_width=True
+                )
+            
+            # PDF 导出
+            if st.button("📄 导出 PDF", use_container_width=True):
+                results = st.session_state['current_backtest_results']
+                pdf_data = export_results_to_pdf(results)
+                if pdf_data:
+                    st.download_button(
+                        label="⬇️ 下载 PDF",
+                        data=pdf_data,
+                        file_name=f"backtest_report_{timestamp}.pdf",
+                        mime="application/pdf",
+                        use_container_width=True
+                    )
     
     # 主内容区
     if run_button:
@@ -130,14 +174,14 @@ def show_backtest_info():
         st.markdown("### 📚 回测说明")
         
         st.markdown("""
-        **回测流程**：
+        **回测流程**:
         
-        1. **选择股票** - 输入 6 位股票代码（如 000001）
+        1. **选择股票** - 输入 6 位股票代码 (如 000001)
         2. **设置时间范围** - 选择回测的起止日期
         3. **配置参数** - 可选调整手续费率和滑点
         4. **运行回测** - 点击运行按钮，等待结果
         
-        **回测指标**：
+        **回测指标**:
         
         - 总收益率、年化收益率
         - 夏普比率、索提诺比率
@@ -145,12 +189,13 @@ def show_backtest_info():
         - 胜率、盈亏比
         - 交易次数
         
-        **图表展示**：
+        **图表展示**:
         
         - 权益曲线图
         - 回撤分析图
         - 交易分布图
         - 指标雷达图
+        - K 线图 (可选)
         """)
     
     with col2:
@@ -161,6 +206,7 @@ def show_backtest_info():
         - 模拟数据用于快速测试，实盘回测请用真实数据
         - 手续费和滑点会影响回测结果，建议设置合理值
         - 回测结果不代表未来收益，仅供策略验证参考
+        - 支持导出 CSV/PDF 格式结果
         """)
 
 
@@ -171,26 +217,34 @@ def run_backtest(strategy, symbol, start_date, end_date, data_source, commission
         from src.backtest.engine import BacktestEngine, load_data
         from src.visualization.plotter import StrategyPlotter
         
-        # 加载数据
-        with st.spinner(f"📊 正在加载 {symbol} 的数据..."):
-            try:
-                data = load_data(
-                    symbol=symbol,
-                    start_date=start_date,
-                    end_date=end_date,
-                    source=data_source
-                )
-                
-                if data is None or len(data) == 0:
-                    st.error("❌ 数据加载失败，请检查股票代码或时间范围")
-                    return
-                
-                st.success(f"✅ 成功加载 {len(data)} 条数据")
-                
-            except Exception as e:
-                st.error(f"❌ 数据加载失败：{str(e)}")
-                st.info("💡 自动切换到模拟数据...")
-                data = load_data(symbol, start_date, end_date, source='mock')
+        # 加载数据 (带缓存)
+        cache_key = f"data_{symbol}_{start_date}_{end_date}_{data_source}"
+        data = cache.get(cache_key)
+        
+        if data is None:
+            with st.spinner(f"📊 正在加载 {symbol} 的数据..."):
+                try:
+                    data = load_data(
+                        symbol=symbol,
+                        start_date=start_date,
+                        end_date=end_date,
+                        source=data_source
+                    )
+                    
+                    if data is None or len(data) == 0:
+                        st.error("❌ 数据加载失败，请检查股票代码或时间范围")
+                        return
+                    
+                    # 缓存数据
+                    cache.set(cache_key, data)
+                    st.success(f"✅ 成功加载 {len(data)} 条数据")
+                    
+                except Exception as e:
+                    st.error(f"❌ 数据加载失败：{str(e)}")
+                    st.info("💡 自动切换到模拟数据...")
+                    data = load_data(symbol, start_date, end_date, source='mock')
+        else:
+            st.info(f"ℹ️ 使用缓存数据：{len(data)} 条")
         
         # 运行回测
         with st.spinner("🔄 正在运行回测..."):
@@ -223,9 +277,37 @@ def run_backtest(strategy, symbol, start_date, end_date, data_source, commission
 def display_backtest_results(results, data):
     """展示回测结果"""
     
-    # 指标摘要
-    st.markdown("### 📊 回测结果摘要")
+    # 导出按钮 (顶部)
+    col1, col2, col3 = st.columns([3, 1, 1])
     
+    with col1:
+        st.markdown("### 📊 回测结果摘要")
+    
+    with col2:
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        csv_data = export_results_to_csv(results)
+        st.download_button(
+            label="📥 CSV",
+            data=csv_data,
+            file_name=f"backtest_{timestamp}.csv",
+            mime="text/csv",
+            use_container_width=True
+        )
+    
+    with col3:
+        pdf_data = export_results_to_pdf(results)
+        if pdf_data:
+            st.download_button(
+                label="📄 PDF",
+                data=pdf_data,
+                file_name=f"backtest_{timestamp}.pdf",
+                mime="application/pdf",
+                use_container_width=True
+            )
+    
+    st.divider()
+    
+    # 指标摘要
     metrics = results.metrics
     
     if metrics:
@@ -305,7 +387,7 @@ def display_backtest_results(results, data):
     # 图表展示
     st.markdown("### 📈 可视化分析")
     
-    tab1, tab2, tab3 = st.tabs(["权益曲线", "回撤分析", "指标雷达图"])
+    tab1, tab2, tab3, tab4 = st.tabs(["权益曲线", "回撤分析", "指标雷达图", "K 线图"])
     
     with tab1:
         show_equity_chart(results)
@@ -315,6 +397,9 @@ def display_backtest_results(results, data):
     
     with tab3:
         show_radar_chart(results)
+    
+    with tab4:
+        show_kline_with_signals(results, data)
     
     # 交易记录
     st.divider()
@@ -345,15 +430,6 @@ def display_backtest_results(results, data):
             use_container_width=True,
             hide_index=True
         )
-        
-        # 下载按钮
-        csv = trades_df.to_csv(index=False, encoding='utf-8-sig')
-        st.download_button(
-            label="📥 下载交易记录 (CSV)",
-            data=csv,
-            file_name=f"{strategy.name}_trades.csv",
-            mime="text/csv"
-        )
     else:
         st.info("ℹ️ 回测期间无交易")
 
@@ -367,35 +443,24 @@ def show_equity_chart(results):
         equity_df = pd.DataFrame(results.equity_curve)
         equity_df.set_index('timestamp', inplace=True)
         
-        fig = go.Figure()
+        fig = create_equity_chart(equity_df, title="权益曲线", initial_value=results.initial_capital)
         
-        # 权益曲线
-        fig.add_trace(go.Scatter(
-            x=equity_df.index,
-            y=equity_df['equity'],
-            mode='lines',
-            name='权益',
-            line=dict(color='#2E86AB', width=2)
-        ))
-        
-        # 初始资金线
-        fig.add_trace(go.Scatter(
-            x=equity_df.index,
-            y=[results.initial_capital] * len(equity_df),
-            mode='lines',
-            name='初始资金',
-            line=dict(color='gray', width=2, dash='dash')
-        ))
-        
-        fig.update_layout(
-            title='权益曲线',
-            xaxis_title='日期',
-            yaxis_title='资金 (元)',
-            hovermode='x unified',
-            height=400
-        )
-        
-        st.plotly_chart(fig, use_container_width=True)
+        if fig:
+            st.plotly_chart(fig, use_container_width=True)
+            
+            # 导出图表
+            if st.button("📥 导出图表为图片", key="export_equity"):
+                try:
+                    fig.write_image("equity_chart.png")
+                    with open("equity_chart.png", "rb") as f:
+                        st.download_button(
+                            label="⬇️ 下载图片",
+                            data=f.read(),
+                            file_name="equity_chart.png",
+                            mime="image/png"
+                        )
+                except Exception as e:
+                    st.error(f"导出失败：{e}")
         
     except Exception as e:
         st.error(f"图表渲染失败：{e}")
@@ -405,35 +470,13 @@ def show_drawdown_chart(results):
     """显示回撤图"""
     
     try:
-        import plotly.graph_objects as go
-        
         equity_df = pd.DataFrame(results.equity_curve)
         equity_df.set_index('timestamp', inplace=True)
         
-        # 计算回撤
-        equity_df['peak'] = equity_df['equity'].cummax()
-        equity_df['drawdown'] = (equity_df['equity'] - equity_df['peak']) / equity_df['peak'] * 100
+        fig = create_drawdown_chart(equity_df, title="回撤分析")
         
-        fig = go.Figure()
-        
-        fig.add_trace(go.Scatter(
-            x=equity_df.index,
-            y=equity_df['drawdown'],
-            mode='lines',
-            name='回撤',
-            line=dict(color='#E63946', width=2),
-            fill='tozeroy'
-        ))
-        
-        fig.update_layout(
-            title='回撤分析',
-            xaxis_title='日期',
-            yaxis_title='回撤 (%)',
-            hovermode='x unified',
-            height=400
-        )
-        
-        st.plotly_chart(fig, use_container_width=True)
+        if fig:
+            st.plotly_chart(fig, use_container_width=True)
         
     except Exception as e:
         st.error(f"图表渲染失败：{e}")
@@ -443,9 +486,6 @@ def show_radar_chart(results):
     """显示指标雷达图"""
     
     try:
-        import plotly.graph_objects as go
-        import numpy as np
-        
         metrics = results.metrics
         
         if not metrics:
@@ -453,43 +493,87 @@ def show_radar_chart(results):
             return
         
         # 选择关键指标
-        categories = ['总收益', '夏普比率', '胜率', '回撤控制']
+        radar_metrics = {
+            '总收益': metrics.get('总收益 (%)', 0),
+            '夏普比率': metrics.get('夏普比率', 0),
+            '胜率': metrics.get('胜率 (%)', 0),
+            '回撤控制': abs(metrics.get('最大回撤 (%)', 0)),
+        }
         
-        # 归一化指标到 0-1
-        values = [
-            min(max(metrics.get('总收益 (%)', 0), -100), 100) / 100,
-            min(max(metrics.get('夏普比率', 0), -2), 3) / 3,
-            min(max(metrics.get('胜率 (%)', 0), 0), 100) / 100,
-            max(1 + min(max(metrics.get('最大回撤 (%)', 0), -100), 0) / 100, 0),
-        ]
+        fig = create_radar_chart(radar_metrics, title="策略指标雷达图")
         
-        # 闭合雷达图
-        values += values[:1]
-        angles = np.linspace(0, 2 * np.pi, len(categories), endpoint=False).tolist()
-        angles += angles[:1]
+        if fig:
+            st.plotly_chart(fig, use_container_width=True)
         
-        fig = go.Figure()
+    except Exception as e:
+        st.error(f"图表渲染失败：{e}")
+
+
+def show_kline_with_signals(results, data):
+    """显示 K 线图和交易信号"""
+    
+    try:
+        import plotly.graph_objects as go
         
-        fig.add_trace(go.Scatterpolar(
-            r=values,
-            theta=[cat for cat in categories] + [categories[0]],
-            fill='toself',
-            name='策略指标',
-            line=dict(color='#2E86AB', width=2)
-        ))
-        
-        fig.update_layout(
-            polar=dict(
-                radialaxis=dict(
-                    visible=True,
-                    range=[0, 1]
-                )),
-            showlegend=False,
-            title='策略指标雷达图',
-            height=500
-        )
-        
-        st.plotly_chart(fig, use_container_width=True)
+        # 准备 K 线数据
+        if isinstance(data, pd.DataFrame) and all(col in data.columns for col in ['open', 'high', 'low', 'close']):
+            kline_df = data.copy()
+            
+            fig = go.Figure()
+            
+            # K 线图
+            fig.add_trace(go.Candlestick(
+                x=kline_df.index,
+                open=kline_df['open'],
+                high=kline_df['high'],
+                low=kline_df['low'],
+                close=kline_df['close'],
+                name='K 线',
+                increasing_line_color='#26A69A',
+                decreasing_line_color='#EF5350'
+            ))
+            
+            # 添加交易信号
+            if results.trades:
+                buy_signals = [t for t in results.trades if t.get('type') == 'buy']
+                sell_signals = [t for t in results.trades if t.get('type') == 'sell']
+                
+                # 买入信号
+                if buy_signals:
+                    buy_x = [t.get('timestamp') for t in buy_signals]
+                    buy_y = [t.get('price') for t in buy_signals]
+                    fig.add_trace(go.Scatter(
+                        x=buy_x,
+                        y=buy_y,
+                        mode='markers',
+                        name='买入',
+                        marker=dict(symbol='triangle-up', size=12, color='red')
+                    ))
+                
+                # 卖出信号
+                if sell_signals:
+                    sell_x = [t.get('timestamp') for t in sell_signals]
+                    sell_y = [t.get('price') for t in sell_signals]
+                    fig.add_trace(go.Scatter(
+                        x=sell_x,
+                        y=sell_y,
+                        mode='markers',
+                        name='卖出',
+                        marker=dict(symbol='triangle-down', size=12, color='green')
+                    ))
+            
+            fig.update_layout(
+                title='K 线图与交易信号',
+                xaxis_title='日期',
+                yaxis_title='价格',
+                height=600,
+                template='plotly_white',
+                xaxis_rangeslider_visible=False
+            )
+            
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.info("ℹ️ 数据格式不支持 K 线图显示")
         
     except Exception as e:
         st.error(f"图表渲染失败：{e}")
