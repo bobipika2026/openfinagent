@@ -15,12 +15,20 @@ import pandas as pd
 import numpy as np
 import logging
 
-from .base import BaseStrategy
-from .rsi_strategy import RSIStrategy
-from .macd_strategy import MACDStrategy
-from .bollinger_strategy import BollingerStrategy
-from .dual_ma_volume_strategy import DualMAVolumeStrategy
-from ..nlp.parser import StrategyParser
+try:
+    from .base import BaseStrategy
+    from .rsi_strategy import RSIStrategy
+    from .macd_strategy import MACDStrategy
+    from .bollinger_strategy import BollingerStrategy
+    from .dual_ma_volume_strategy import DualMAVolumeStrategy
+    from ..nlp.parser import StrategyParser
+except ImportError:
+    from strategy.base import BaseStrategy
+    from strategy.rsi_strategy import RSIStrategy
+    from strategy.macd_strategy import MACDStrategy
+    from strategy.bollinger_strategy import BollingerStrategy
+    from strategy.dual_ma_volume_strategy import DualMAVolumeStrategy
+    from nlp.parser import StrategyParser
 
 logger = logging.getLogger(__name__)
 
@@ -28,16 +36,18 @@ logger = logging.getLogger(__name__)
 class MACrossStrategy(BaseStrategy):
     """均线交叉策略"""
 
-    def __init__(self, short_window: int = 5, long_window: int = 20, **kwargs):
+    def __init__(self, short_window: int = 5, long_window: int = 20, name: str = None, **kwargs):
         """
         初始化均线交叉策略
 
         Args:
             short_window: 短期均线周期
             long_window: 长期均线周期
+            name: 策略名称
             **kwargs: 传递给基类的参数
         """
-        name = kwargs.get('name', f'MA_Cross_{short_window}_{long_window}')
+        if name is None:
+            name = f'MA_Cross_{short_window}_{long_window}'
         super().__init__(name=name, **kwargs)
         self.short_window = short_window
         self.long_window = long_window
@@ -86,16 +96,18 @@ class MACrossStrategy(BaseStrategy):
 class MomentumStrategy(BaseStrategy):
     """动量策略"""
 
-    def __init__(self, lookback_period: int = 20, threshold: float = 0.05, **kwargs):
+    def __init__(self, lookback_period: int = 20, threshold: float = 0.05, name: str = None, **kwargs):
         """
         初始化动量策略
 
         Args:
             lookback_period: 回看周期
             threshold: 收益率阈值
+            name: 策略名称
             **kwargs: 传递给基类的参数
         """
-        name = kwargs.get('name', f'Momentum_{lookback_period}_{threshold*100:.0f}%')
+        if name is None:
+            name = f'Momentum_{lookback_period}_{threshold*100:.0f}%'
         super().__init__(name=name, **kwargs)
         self.lookback_period = lookback_period
         self.threshold = threshold
@@ -167,9 +179,10 @@ class StrategyBuilder:
         params = parsed.get('params', {})
         params.update(kwargs)
 
-        if 'initial_capital' in parsed:
+        # 合并参数，kwargs 优先
+        if 'initial_capital' in parsed and 'initial_capital' not in kwargs:
             params['initial_capital'] = parsed['initial_capital']
-        if 'name' in parsed:
+        if 'name' in parsed and 'name' not in kwargs:
             params['name'] = parsed['name']
 
         strategy_class = cls._strategy_templates.get(strategy_type, MACrossStrategy)

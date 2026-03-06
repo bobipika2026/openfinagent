@@ -58,11 +58,9 @@ class DualMAVolumeStrategy(BaseStrategy):
             require_volume_confirm: 是否要求成交量确认 (默认 True)
             **kwargs: 传递给基类的参数
         """
-        name = kwargs.get(
-            'name',
-            f'DualMA_Vol_{short_window}_{long_window}'
-        )
-        super().__init__(name=name, **kwargs)
+        if 'name' not in kwargs:
+            kwargs['name'] = f'DualMA_Vol_{short_window}_{long_window}'
+        super().__init__(**kwargs)
 
         # 参数验证
         if short_window >= long_window:

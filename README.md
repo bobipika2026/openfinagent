@@ -1,4 +1,6 @@
-# TradeFlow AI 🚀
+# OpenFinAgent 🚀
+
+> **项目名称已更新**: TradeFlow AI → OpenFinAgent
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -61,14 +63,14 @@ TradeFlow AI 是一个**革命性的量化交易开发平台**，让没有编程
 
 ```bash
 # 克隆项目
-git clone https://github.com/your-org/tradeflow-ai.git
-cd tradeflow-ai
+git clone https://github.com/bobipika2026/openfinagent.git
+cd openfinagent
 
 # 安装依赖
 pip install -r requirements.txt
 
 # 验证安装
-python -c "from tradeflow import StrategyBuilder; print('✅ 安装成功！')"
+python -c "from src.strategy import StrategyBuilder; print('✅ 安装成功！')"
 ```
 
 ### 2️⃣ 第一个策略（5 分钟）
@@ -76,8 +78,8 @@ python -c "from tradeflow import StrategyBuilder; print('✅ 安装成功！')"
 创建文件 `my_strategy.py`：
 
 ```python
-from tradeflow import StrategyBuilder, BacktestEngine
-from tradeflow.backtest.engine import load_data
+from src.strategy import StrategyBuilder, BacktestEngine
+from src.backtest.engine import load_data
 
 # 用自然语言描述策略
 strategy = StrategyBuilder.from_natural_language("""
@@ -105,14 +107,14 @@ python my_strategy.py
 ### 3️⃣ 运行示例
 
 ```bash
+# 运行演示脚本
+python run_demo.py
+
 # 基础示例 - 均线交叉策略
 python examples/basic/01_ma_cross_strategy.py
 
-# 高级示例 - 多策略对比
-python examples/advanced/01_multi_strategy_compare.py
-
-# 实战示例 - A 股回测
-python examples/real_world/01_a_stock_backtest.py
+# 高级示例 - 所有策略演示
+python examples/advanced/02_all_strategies_demo.py
 ```
 
 ---
@@ -156,7 +158,8 @@ strategy = StrategyBuilder.create(
 ### 示例 4: 多策略对比
 
 ```python
-from tradeflow import StrategyBuilder, BacktestEngine
+from src.strategy import StrategyBuilder
+from src.backtest import BacktestEngine
 
 # 创建多个策略
 strategies = [
@@ -238,24 +241,9 @@ tradeflow-ai/
 
 ## 🖼️ 截图展示
 
-### 回测结果展示
-
-![回测结果示例](docs/images/backtest_result.png)
-*回测结果包含权益曲线、性能指标和交易记录*
-
-### 策略对比图
-
-![策略对比](docs/images/strategy_comparison.png)
-*多策略性能对比，直观展示各策略优劣*
-
-### 指标雷达图
-
-![指标雷达图](docs/images/metrics_radar.png)
-*多维度指标雷达图，全面评估策略表现*
-
-> 📸 **截图位置**: 所有截图位于 `docs/images/` 目录
+> 📸 **截图更新中**: 我们会在后续版本中添加实际运行截图
 > 
-> 🎬 **动图演示**: 查看 `docs/gifs/` 目录获取操作演示动图
+> 当前可以运行 `python run_demo.py` 查看实际回测结果和图表
 
 ---
 
@@ -278,8 +266,8 @@ tradeflow-ai/
 
 欢迎贡献代码、文档、示例策略或问题反馈！
 
-- 🐛 报告问题 → [GitHub Issues](https://github.com/your-org/tradeflow-ai/issues)
-- 💡 提交建议 → [GitHub Discussions](https://github.com/your-org/tradeflow-ai/discussions)
+- 🐛 报告问题 → [GitHub Issues](https://github.com/bobipika2026/openfinagent/issues)
+- 💡 提交建议 → [GitHub Discussions](https://github.com/bobipika2026/openfinagent/discussions)
 - 🔧 贡献代码 → 阅读 [CONTRIBUTING.md](CONTRIBUTING.md)
 - 📝 改进文档 → 提交 PR
 
@@ -297,10 +285,9 @@ MIT License - 详见 [LICENSE](LICENSE) 文件
 
 ## 🔗 相关链接
 
-- 🏠 官方网站：https://tradeflow.ai
-- 📚 文档中心：https://docs.tradeflow.ai
-- 💬 社区论坛：https://community.tradeflow.ai
-- 🐦 关注更新：https://twitter.com/tradeflow_ai
+- 🏠 GitHub 仓库：https://github.com/bobipika2026/openfinagent
+- 📚 文档中心：查看 `docs/` 目录
+- 💬 问题反馈：[GitHub Issues](https://github.com/bobipika2026/openfinagent/issues)
 
 ---
 

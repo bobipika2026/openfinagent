@@ -60,11 +60,9 @@ class BollingerStrategy(BaseStrategy):
             use_middle_band: 是否使用中轨确认 (默认 True)
             **kwargs: 传递给基类的参数
         """
-        name = kwargs.get(
-            'name',
-            f'Bollinger_{window}_{num_std}_{mode}'
-        )
-        super().__init__(name=name, **kwargs)
+        if 'name' not in kwargs:
+            kwargs['name'] = f'Bollinger_{window}_{num_std}_{mode}'
+        super().__init__(**kwargs)
 
         # 参数验证
         if window <= 1:

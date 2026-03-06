@@ -55,8 +55,9 @@ class RSIStrategy(BaseStrategy):
             hold_period: 最小持仓周期 (默认 3 天，避免频繁交易)
             **kwargs: 传递给基类的参数 (name, initial_capital 等)
         """
-        name = kwargs.get('name', f'RSI_{rsi_period}_{oversold_threshold}_{overbought_threshold}')
-        super().__init__(name=name, **kwargs)
+        if 'name' not in kwargs:
+            kwargs['name'] = f'RSI_{rsi_period}_{oversold_threshold}_{overbought_threshold}'
+        super().__init__(**kwargs)
 
         # 参数验证
         if rsi_period <= 1:

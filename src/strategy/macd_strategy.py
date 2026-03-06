@@ -58,11 +58,9 @@ class MACDStrategy(BaseStrategy):
             histogram_threshold: Histogram 确认阈值 (默认 0)
             **kwargs: 传递给基类的参数
         """
-        name = kwargs.get(
-            'name',
-            f'MACD_{fast_period}_{slow_period}_{signal_period}'
-        )
-        super().__init__(name=name, **kwargs)
+        if 'name' not in kwargs:
+            kwargs['name'] = f'MACD_{fast_period}_{slow_period}_{signal_period}'
+        super().__init__(**kwargs)
 
         # 参数验证
         if fast_period >= slow_period:
