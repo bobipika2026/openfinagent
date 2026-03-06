@@ -193,7 +193,7 @@ for name, result in results.items():
 ## 📁 项目结构
 
 ```
-tradeflow-ai/
+openfinagent/
 ├── README.md                    # 项目说明（本文件）
 ├── CONTRIBUTING.md              # 贡献指南
 ├── requirements.txt             # Python 依赖包

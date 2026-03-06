@@ -49,7 +49,7 @@
 OpenFinAgent 的所有策略都继承自 `BaseStrategy` 基类：
 
 ```python
-from tradeflow.strategy import BaseStrategy
+from openfinagent.strategy import BaseStrategy
 
 class BaseStrategy:
     """策略基类"""
@@ -112,9 +112,9 @@ class BaseStrategy:
 """
 
 import pandas as pd
-from tradeflow.strategy import BaseStrategy
-from tradeflow import BacktestEngine
-from tradeflow.backtest.engine import load_data
+from openfinagent.strategy import BaseStrategy
+from openfinagent import BacktestEngine
+from openfinagent.backtest.engine import load_data
 
 
 class BreakoutStrategy(BaseStrategy):
@@ -222,9 +222,9 @@ python custom_strategy_1.py
 
 import pandas as pd
 import numpy as np
-from tradeflow.strategy import BaseStrategy
-from tradeflow import BacktestEngine
-from tradeflow.backtest.engine import load_data
+from openfinagent.strategy import BaseStrategy
+from openfinagent import BacktestEngine
+from openfinagent.backtest.engine import load_data
 
 
 def calculate_rsi(prices: pd.Series, period: int = 14) -> pd.Series:
@@ -363,9 +363,9 @@ python custom_strategy_2.py
 
 import pandas as pd
 import numpy as np
-from tradeflow.strategy import BaseStrategy
-from tradeflow import BacktestEngine
-from tradeflow.backtest.engine import load_data
+from openfinagent.strategy import BaseStrategy
+from openfinagent import BacktestEngine
+from openfinagent.backtest.engine import load_data
 
 
 def calculate_rsi(prices: pd.Series, period: int = 14) -> pd.Series:
@@ -502,7 +502,7 @@ python custom_strategy_3.py
 你可以将自定义策略注册到 `StrategyBuilder`，然后用自然语言方式调用：
 
 ```python
-from tradeflow import StrategyBuilder
+from openfinagent import StrategyBuilder
 from custom_strategy_3 import CompositeStrategy
 
 # 注册策略

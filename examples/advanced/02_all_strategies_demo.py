@@ -17,7 +17,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 
-from tradeflow.strategy import (
+from src.strategy import (
     MACrossStrategy,
     MomentumStrategy,
     RSIStrategy,
@@ -26,19 +26,19 @@ from tradeflow.strategy import (
     DualMAVolumeStrategy,
     StrategyBuilder
 )
-from tradeflow.backtest import (
+from src.backtest import (
     BacktestEngine,
     BacktestResults,
     MultiStrategyBacktester,
     BatchBacktester,
     BatchBacktestConfig
 )
-from tradeflow.optimization.optimizer import (
+from src.optimization.optimizer import (
     StrategyOptimizer,
     ParameterRange
 )
-from tradeflow.risk.control import RiskController, RiskLimits
-from tradeflow.data.sources import MockDataSource
+from src.risk.control import RiskController, RiskLimits
+from src.data.sources import MockDataSource
 
 
 def generate_demo_data(n_days=500, seed=42):

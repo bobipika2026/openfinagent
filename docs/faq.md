@@ -62,12 +62,12 @@ python --version
 # 2. 安装 Git（可选，用于克隆项目）
 # 3. 打开命令提示符或 PowerShell
 
-git clone https://github.com/your-org/tradeflow-ai.git
-cd tradeflow-ai
+git clone https://github.com/bobipika2026/openfinagent.git
+cd openfinagent
 pip install -r requirements.txt
 
 # 验证安装
-python -c "from tradeflow import StrategyBuilder; print('OK')"
+python -c "from openfinagent import StrategyBuilder; print('OK')"
 ```
 
 ### Q4: 需要 API 密钥吗？
@@ -111,7 +111,7 @@ strategy = StrategyBuilder.create(
 
 **方案 3**: 自定义策略类
 ```python
-from tradeflow.strategy import BaseStrategy
+from openfinagent.strategy import BaseStrategy
 
 class MyStrategy(BaseStrategy):
     def on_bar(self, data, index):
@@ -340,7 +340,7 @@ gc.collect()
 
 ```bash
 # 确保在项目根目录
-cd /path/to/tradeflow-ai
+cd /path/to/openfinagent
 
 # 添加 src 到 Python 路径
 export PYTHONPATH=$PYTHONPATH:$(pwd)/src
@@ -349,7 +349,7 @@ export PYTHONPATH=$PYTHONPATH:$(pwd)/src
 import sys
 sys.path.insert(0, 'src')
 
-from tradeflow import StrategyBuilder
+from openfinagent import StrategyBuilder
 ```
 
 ### Q21: 出现 "KeyError: 'close'" 怎么办？
@@ -428,7 +428,7 @@ pip install -r requirements.txt --upgrade
 
 **A**: 
 
-1. 访问 [GitHub Issues](https://github.com/your-org/tradeflow-ai/issues)
+1. 访问 [GitHub Issues](https://github.com/bobipika2026/openfinagent/issues)
 2. 点击 "New Issue"
 3. 提供以下信息：
    - 问题描述
@@ -468,7 +468,7 @@ pip install -r requirements.txt --upgrade
 如果以上 FAQ 没有解决你的问题：
 
 - 💬 加入社区讨论
-- 📧 发送邮件至 support@tradeflow.ai
+- 📧 发送邮件至 support@openfinagent.ai
 - 🐛 提交 GitHub Issue
 
 ---

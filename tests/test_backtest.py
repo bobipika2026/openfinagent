@@ -9,7 +9,7 @@ sys.path.insert(0, '../src')
 
 import pandas as pd
 import numpy as np
-from tradeflow.backtest.results import BacktestResults
+from openfinagent.backtest.results import BacktestResults
 
 
 def test_backtest_results():

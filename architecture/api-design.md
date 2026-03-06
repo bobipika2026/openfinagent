@@ -40,7 +40,7 @@ self._data
 ### 2.1 策略构建器
 
 ```python
-from tradeflow import StrategyBuilder
+from openfinagent import StrategyBuilder
 
 # 方式 1: 自然语言创建
 strategy = StrategyBuilder.from_natural_language("""
@@ -73,7 +73,7 @@ strategy = MyStrategy(param1=20)
 ### 2.2 数据加载
 
 ```python
-from tradeflow import load_data
+from openfinagent import load_data
 
 # A 股数据
 data = load_data(
@@ -99,7 +99,7 @@ data_dict = load_data(
 ### 2.3 回测引擎
 
 ```python
-from tradeflow import BacktestEngine
+from openfinagent import BacktestEngine
 
 # 创建引擎
 engine = BacktestEngine(
@@ -179,7 +179,7 @@ equity = result.equity_curve
 ### 3.1 策略基类
 
 ```python
-from tradeflow.strategy import BaseStrategy
+from openfinagent.strategy import BaseStrategy
 
 class MyStrategy(BaseStrategy):
     """自定义策略示例"""
@@ -284,7 +284,7 @@ class StrategyContext:
 ### 3.3 技术指标 API
 
 ```python
-from tradeflow.strategy import indicators
+from openfinagent.strategy import indicators
 
 # 移动平均线
 ma5 = indicators.SMA(data['close'], period=5)
@@ -321,7 +321,7 @@ def my_indicator(data: DataFrame) -> Series:
     return (data['close'] - data['open']) / data['open']
 
 # 注册指标
-from tradeflow.strategy import IndicatorRegistry
+from openfinagent.strategy import IndicatorRegistry
 IndicatorRegistry.register('my_indicator', my_indicator)
 ```
 
@@ -332,7 +332,7 @@ IndicatorRegistry.register('my_indicator', my_indicator)
 ### 4.1 数据加载器
 
 ```python
-from tradeflow.data import DataAdapter
+from openfinagent.data import DataAdapter
 
 # 使用 AKShare
 adapter = DataAdapter.create('akshare')
@@ -363,7 +363,7 @@ data = adapter.get_klines(
 ### 4.2 数据模型
 
 ```python
-from tradeflow.data import BarData, TickData
+from openfinagent.data import BarData, TickData
 
 # K 线数据
 class BarData:
@@ -401,7 +401,7 @@ class TickData:
 ### 5.1 基础绘图
 
 ```python
-from tradeflow.visualization import Plotter
+from openfinagent.visualization import Plotter
 
 # 创建绘图器
 plotter = Plotter()
@@ -428,7 +428,7 @@ plotter.save('result.png', dpi=300)
 ### 5.2 K 线图
 
 ```python
-from tradeflow.visualization import plot_kline_with_signals
+from openfinagent.visualization import plot_kline_with_signals
 
 # K 线 + 买卖信号
 plot_kline_with_signals(
@@ -507,7 +507,7 @@ output:
 ### 7.1 异常类型
 
 ```python
-from tradeflow.exceptions import (
+from openfinagent.exceptions import (
     OpenFinAgentError,        # 基类异常
     DataError,             # 数据错误
     StrategyError,         # 策略错误
@@ -548,14 +548,14 @@ except InsufficientCapitalError as e:
 ### 8.1 全局配置
 
 ```python
-from tradeflow import config
+from openfinagent import config
 
 # 设置数据源
 config.set_data_source('akshare')
 
 # 设置缓存
 config.set_cache_enabled(True)
-config.set_cache_dir('~/.tradeflow/cache')
+config.set_cache_dir('~/.openfinagent/cache')
 
 # 设置日志级别
 config.set_log_level('INFO')
@@ -595,7 +595,7 @@ config = StrategyConfig(
 
 ```python
 # 注册自定义策略
-from tradeflow.strategy import StrategyRegistry
+from openfinagent.strategy import StrategyRegistry
 
 @StrategyRegistry.register
 class MyStrategy(BaseStrategy):
@@ -603,14 +603,14 @@ class MyStrategy(BaseStrategy):
     # ...
 
 # 注册自定义指标
-from tradeflow.strategy import IndicatorRegistry
+from openfinagent.strategy import IndicatorRegistry
 
 @IndicatorRegistry.register('my_ma')
 def my_moving_average(data: DataFrame, period: int = 20) -> Series:
     return data['close'].rolling(period).mean()
 
 # 注册自定义数据源
-from tradeflow.data import DataAdapterRegistry
+from openfinagent.data import DataAdapterRegistry
 
 @DataAdapterRegistry.register('my_source')
 class MyDataAdapter(DataAdapter):
@@ -626,7 +626,7 @@ class MyDataAdapter(DataAdapter):
 # pip install tradeflow-plugin-xxx
 
 # 加载插件
-from tradeflow import load_plugin
+from openfinagent import load_plugin
 
 load_plugin('tradeflow-plugin-ml')  # 机器学习策略
 load_plugin('tradeflow-plugin-risk')  # 风控模块

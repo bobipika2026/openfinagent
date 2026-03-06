@@ -135,7 +135,7 @@ python_requires = ">=3.9,<4.0"
 | **K 线数据** | 内存 (DataFrame) + 本地缓存 (Parquet) | 轻量级、快速 |
 | **策略配置** | JSON/YAML 文件 | 简单、易读 |
 | **回测结果** | JSON + CSV | 便于分享和导出 |
-| **用户配置** | ~/.tradeflow/config.yaml | 本地配置 |
+| **用户配置** | ~/.openfinagent/config.yaml | 本地配置 |
 
 ### 4.2 未来规划 (v0.5+)
 
@@ -160,7 +160,7 @@ python setup.py sdist bdist_wheel
 twine upload dist/*
 
 # 安装
-pip install tradeflow-ai
+pip install openfinagent
 ```
 
 ### 5.2 Docker 容器 (Phase 3)

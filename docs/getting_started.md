@@ -22,31 +22,31 @@
 
 ```bash
 # 1. 克隆项目
-git clone https://github.com/your-org/tradeflow-ai.git
-cd tradeflow-ai
+git clone https://github.com/bobipika2026/openfinagent.git
+cd openfinagent
 
 # 2. 安装依赖
 pip install -r requirements.txt
 
 # 3. 验证安装
-python -c "from tradeflow import StrategyBuilder; print('✅ 安装成功！')"
+python -c "from openfinagent import StrategyBuilder; print('✅ 安装成功！')"
 ```
 
 ### 方法 2: 使用 pip
 
 ```bash
 # 直接从 PyPI 安装（如已发布）
-pip install tradeflow-ai
+pip install openfinagent
 ```
 
 ### 方法 3: 下载源码
 
 ```bash
 # 1. 下载 ZIP 文件
-# 访问 https://github.com/your-org/tradeflow-ai 下载源码
+# 访问 https://github.com/bobipika2026/openfinagent 下载源码
 
 # 2. 解压并安装
-cd tradeflow-ai
+cd openfinagent
 pip install -r requirements.txt
 ```
 
@@ -65,8 +65,8 @@ pip install -r requirements.txt
 创建文件 `my_first_strategy.py`：
 
 ```python
-from tradeflow import StrategyBuilder, BacktestEngine
-from tradeflow.backtest.engine import load_data
+from openfinagent import StrategyBuilder, BacktestEngine
+from openfinagent.backtest.engine import load_data
 
 # 步骤 1: 用自然语言创建策略
 strategy = StrategyBuilder.from_natural_language("""
@@ -283,7 +283,7 @@ data = load_data("600519.SH", "2023-01-01", "2023-12-31", source='mock')
 **A**: 继承 `BaseStrategy` 类：
 
 ```python
-from tradeflow.strategy import BaseStrategy
+from openfinagent.strategy import BaseStrategy
 
 class MyStrategy(BaseStrategy):
     def on_bar(self, data, index):
@@ -376,8 +376,8 @@ class MyStrategy(BaseStrategy):
 
 - 📖 文档：[docs/](./)
 - 💬 示例：[examples/](../examples/)
-- 🐛 问题：[GitHub Issues](https://github.com/your-org/tradeflow-ai/issues)
-- 💬 讨论：[GitHub Discussions](https://github.com/your-org/tradeflow-ai/discussions)
+- 🐛 问题：[GitHub Issues](https://github.com/bobipika2026/openfinagent/issues)
+- 💬 讨论：[GitHub Discussions](https://github.com/bobipika2026/openfinagent/discussions)
 
 ---
 

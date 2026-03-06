@@ -18,7 +18,7 @@ from datetime import datetime
 # 添加 src 到路径
 sys.path.insert(0, '../src')
 
-from tradeflow.strategy import (
+from openfinagent.strategy import (
     BaseStrategy,
     MACrossStrategy,
     MomentumStrategy,
@@ -31,7 +31,7 @@ from tradeflow.strategy import (
     calculate_macd,
     calculate_bollinger_bands
 )
-from tradeflow.backtest import BacktestEngine, BacktestResults
+from openfinagent.backtest import BacktestEngine, BacktestResults
 
 
 def generate_test_data(n_days=200, initial_price=100.0, seed=42):

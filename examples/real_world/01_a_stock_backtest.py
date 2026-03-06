@@ -9,9 +9,9 @@
 import sys
 sys.path.insert(0, '../../src')
 
-from tradeflow import StrategyBuilder, BacktestEngine
-from tradeflow.backtest.engine import load_data
-from tradeflow.visualization.plotter import StrategyPlotter
+from src import StrategyBuilder, BacktestEngine
+from src.backtest.engine import load_data
+from src.visualization.plotter import StrategyPlotter
 
 
 def main():

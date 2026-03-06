@@ -3,7 +3,7 @@
 ## 📁 项目文件列表
 
 ```
-tradeflow-ai/
+openfinagent/
 ├── README.md                          # 项目说明文档
 ├── PROJECT_SUMMARY.md                 # 项目总结（本文件）
 ├── requirements.txt                   # Python 依赖包

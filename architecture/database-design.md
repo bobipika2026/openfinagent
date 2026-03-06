@@ -16,8 +16,8 @@
 | **K 线数据** | 本地文件缓存 | Parquet | 列式存储、压缩率高 |
 | **策略配置** | 本地文件 | YAML/JSON | 易读易编辑 |
 | **回测结果** | 本地文件 | JSON + CSV | 便于分享和导出 |
-| **用户配置** | 本地文件 | YAML | ~/.tradeflow/config.yaml |
-| **日志** | 本地文件 | JSON Lines | ~/.tradeflow/logs/ |
+| **用户配置** | 本地文件 | YAML | ~/.openfinagent/config.yaml |
+| **日志** | 本地文件 | JSON Lines | ~/.openfinagent/logs/ |
 
 ### 1.2 未来规划 (v0.5+)
 
@@ -38,7 +38,7 @@
 ### 2.1 目录结构
 
 ```
-~/.tradeflow/
+~/.openfinagent/
 ├── config.yaml              # 用户配置
 ├── cache/                   # 数据缓存
 │   ├── akshare/
@@ -70,7 +70,7 @@
 
 ```python
 # Parquet 文件结构
-# 文件：~/.tradeflow/cache/akshare/600519.SH/1d.parquet
+# 文件：~/.openfinagent/cache/akshare/600519.SH/1d.parquet
 
 # Schema:
 #   datetime: timestamp[us]
@@ -303,33 +303,33 @@ SELECT add_continuous_refresh_policy('klines_1h', INTERVAL '1 hour');
 ### 4.1 Key 命名规范
 
 ```
-tradeflow:{module}:{resource}:{identifier}
+openfinagent:{module}:{resource}:{identifier}
 ```
 
 ### 4.2 缓存结构
 
 ```redis
 # 用户会话 (String, TTL: 2h)
-tradeflow:session:{user_id} -> JWT Token
+openfinagent:session:{user_id} -> JWT Token
 
 # 热门策略 (Sorted Set, 按浏览量排序)
-tradeflow:strategies:popular -> {strategy_id: score}
+openfinagent:strategies:popular -> {strategy_id: score}
 
 # 回测进度 (Hash, TTL: 24h)
-tradeflow:backtest:{backtest_id} -> {
+openfinagent:backtest:{backtest_id} -> {
     status: "running",
     progress: "0.65",
     current_bar: "2023-06-15"
 }
 
 # 数据缓存 (String, TTL: 1h)
-tradeflow:data:kline:{symbol}:{interval}:{date} -> Parquet Base64
+openfinagent:data:kline:{symbol}:{interval}:{date} -> Parquet Base64
 
 # 限流计数 (String, TTL: 60s)
-tradeflow:ratelimit:{user_id}:{endpoint} -> count
+openfinagent:ratelimit:{user_id}:{endpoint} -> count
 
 # 实时行情 (Hash, TTL: 60s)
-tradeflow:market:quote:{symbol} -> {
+openfinagent:market:quote:{symbol} -> {
     last_price: "10.50",
     volume: "1000000",
     update_time: "2026-03-06T08:00:00Z"
@@ -448,7 +448,7 @@ pg_dump -U tradeflow -h localhost tradeflow | gzip > $BACKUP_DIR/postgres_$DATE.
 pg_dump -U tradeflow -h localhost tradeflow -t klines | gzip > $BACKUP_DIR/timescale_$DATE.sql.gz
 
 # 本地文件备份
-tar -czf $BACKUP_DIR/files_$DATE.tar.gz ~/.tradeflow/
+tar -czf $BACKUP_DIR/files_$DATE.tar.gz ~/.openfinagent/
 
 # 清理旧备份
 find $BACKUP_DIR -name "*.gz" -mtime +30 -delete

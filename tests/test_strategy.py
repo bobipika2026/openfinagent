@@ -12,9 +12,9 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 
-from tradeflow.strategy import StrategyBuilder, BaseStrategy
-from tradeflow.backtest import BacktestEngine, BacktestResults
-from tradeflow.nlp import StrategyParser
+from openfinagent.strategy import StrategyBuilder, BaseStrategy
+from openfinagent.backtest import BacktestEngine, BacktestResults
+from openfinagent.nlp import StrategyParser
 
 
 def generate_test_data(n_days=100, initial_price=100.0):

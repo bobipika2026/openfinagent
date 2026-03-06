@@ -85,14 +85,14 @@
 
 ```bash
 # 1. 在 GitHub 上 Fork 项目
-# 访问 https://github.com/your-org/tradeflow-ai 点击 Fork
+# 访问 https://github.com/bobipika2026/openfinagent 点击 Fork
 
 # 2. 克隆你的 Fork
-git clone https://github.com/YOUR_USERNAME/tradeflow-ai.git
-cd tradeflow-ai
+git clone https://github.com/YOUR_USERNAME/openfinagent.git
+cd openfinagent
 
 # 3. 添加上游仓库（保持同步）
-git remote add upstream https://github.com/your-org/tradeflow-ai.git
+git remote add upstream https://github.com/bobipika2026/openfinagent.git
 ```
 
 ### 2. 创建虚拟环境
@@ -313,7 +313,7 @@ Traceback (most recent call last):
 
 ### 提交 Bug
 
-1. 访问 [Issues](https://github.com/your-org/tradeflow-ai/issues)
+1. 访问 [Issues](https://github.com/bobipika2026/openfinagent/issues)
 2. 点击 "New Issue"
 3. 选择 "Bug Report" 模板
 4. 填写详细信息
@@ -344,7 +344,7 @@ Traceback (most recent call last):
 
 ### 提交建议
 
-1. 访问 [Issues](https://github.com/your-org/tradeflow-ai/issues)
+1. 访问 [Issues](https://github.com/bobipika2026/openfinagent/issues)
 2. 点击 "New Issue"
 3. 选择 "Feature Request" 模板
 4. 填写详细信息
@@ -397,7 +397,7 @@ git push origin main
 ```python
 # tests/test_strategy.py
 import unittest
-from tradeflow.strategy import MACrossStrategy
+from openfinagent.strategy import MACrossStrategy
 
 
 class TestMACrossStrategy(unittest.TestCase):
@@ -545,8 +545,8 @@ A: 欢迎提议！请先在 Issue 中讨论，确保符合项目定位。
 
 ## 需要帮助？
 
-- 💬 在 [Discussions](https://github.com/your-org/tradeflow-ai/discussions) 提问
-- 📧 发送邮件至 contributors@tradeflow.ai
+- 💬 在 [Discussions](https://github.com/bobipika2026/openfinagent/discussions) 提问
+- 📧 发送邮件至 contributors@openfinagent.ai
 - 🐦 在 Twitter 联系我们
 
 ---
@@ -555,6 +555,6 @@ A: 欢迎提议！请先在 Issue 中讨论，确保符合项目定位。
 
 **再次感谢你的贡献！** 🚀
 
-[开始贡献](#贡献方式) · [查看 Issue](https://github.com/your-org/tradeflow-ai/issues) · [加入讨论](https://github.com/your-org/tradeflow-ai/discussions)
+[开始贡献](#贡献方式) · [查看 Issue](https://github.com/bobipika2026/openfinagent/issues) · [加入讨论](https://github.com/bobipika2026/openfinagent/discussions)
 
 </div>

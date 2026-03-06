@@ -4,7 +4,7 @@
 
 ```bash
 # 进入项目目录
-cd tradeflow-ai
+cd openfinagent
 
 # 运行演示
 python3 run_demo.py

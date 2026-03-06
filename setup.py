@@ -16,14 +16,14 @@ requirements = (this_directory / "requirements.txt").read_text(encoding='utf-8')
 requirements = [r.strip() for r in requirements if r.strip() and not r.startswith('#')]
 
 setup(
-    name="tradeflow-ai",
+    name="openfinagent",
     version="0.1.0",
     author="OpenFinAgent Team",
-    author_email="tradeflow@example.com",
+    author_email="openfinagent@example.com",
     description="AI 量化交易助手 - 用自然语言写量化策略",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/your-org/tradeflow-ai",
+    url="https://github.com/bobipika2026/openfinagent",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     classifiers=[
@@ -48,7 +48,7 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "tradeflow=tradeflow.cli:main",
+            "openfinagent=openfinagent.cli:main",
         ],
     },
     include_package_data=True,

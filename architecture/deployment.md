@@ -14,7 +14,7 @@
 │                      用户本地环境                            │
 │                                                             │
 │  ┌─────────────────────────────────────────────────────┐   │
-│  │              pip install tradeflow-ai                │   │
+│  │              pip install openfinagent                │   │
 │  └─────────────────────────────────────────────────────┘   │
 │                           │                                 │
 │                           ▼                                 │
@@ -28,7 +28,7 @@
 │                                                             │
 │  ┌─────────────────────────────────────────────────────┐   │
 │  │              本地文件存储                            │   │
-│  │  ~/.tradeflow/cache/  ~/.tradeflow/results/        │   │
+│  │  ~/.openfinagent/cache/  ~/.openfinagent/results/        │   │
 │  └─────────────────────────────────────────────────────┘   │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
@@ -103,7 +103,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='tradeflow-ai',
+    name='openfinagent',
     version='0.1.0',
     packages=find_packages(where='src'),
     package_dir={'': 'src'},
@@ -153,7 +153,7 @@ python setup.py sdist bdist_wheel
 twine upload --repository testpypi dist/*
 
 # 4. 测试安装
-pip install -i https://test.pypi.org/simple/ tradeflow-ai
+pip install -i https://test.pypi.org/simple/ openfinagent
 
 # 5. 正式上传
 twine upload dist/*
@@ -163,20 +163,20 @@ twine upload dist/*
 
 ```bash
 # 基础安装
-pip install tradeflow-ai
+pip install openfinagent
 
 # 完整安装 (包含所有可选依赖)
-pip install tradeflow-ai[full]
+pip install openfinagent[full]
 
 # 开发安装
-pip install tradeflow-ai[dev]
+pip install openfinagent[dev]
 
 # 指定版本
-pip install tradeflow-ai==0.1.0
+pip install openfinagent==0.1.0
 
 # 从源码安装
-git clone https://github.com/your-org/tradeflow-ai.git
-cd tradeflow-ai
+git clone https://github.com/bobipika2026/openfinagent.git
+cd openfinagent
 pip install -e .
 ```
 
@@ -312,7 +312,7 @@ spec:
     spec:
       containers:
       - name: tradeflow-api
-        image: tradeflow/tradeflow-ai:v0.5.0
+        image: tradeflow/openfinagent:v0.5.0
         ports:
         - containerPort: 8000
         resources:
@@ -457,8 +457,8 @@ jobs:
         context: .
         push: true
         tags: |
-          tradeflow/tradeflow-ai:${{ github.ref_name }}
-          tradeflow/tradeflow-ai:latest
+          tradeflow/openfinagent:${{ github.ref_name }}
+          tradeflow/openfinagent:latest
 
   deploy:
     needs: build
@@ -471,7 +471,7 @@ jobs:
     - name: Deploy to Kubernetes
       run: |
         kubectl set image deployment/tradeflow-api \
-          tradeflow-api=tradeflow/tradeflow-ai:${{ github.ref_name }} \
+          tradeflow-api=tradeflow/openfinagent:${{ github.ref_name }} \
           -n tradeflow
 ```
 
@@ -581,7 +581,7 @@ YAHOO_API_KEY=
 
 # 缓存配置
 TRADEFLOW_CACHE_ENABLED=true
-TRADEFLOW_CACHE_DIR=~/.tradeflow/cache
+TRADEFLOW_CACHE_DIR=~/.openfinagent/cache
 TRADEFLOW_CACHE_TTL=3600
 
 # 安全配置
@@ -605,7 +605,7 @@ class Settings(BaseSettings):
     
     data_source: str = "akshare"
     cache_enabled: bool = True
-    cache_dir: str = "~/.tradeflow/cache"
+    cache_dir: str = "~/.openfinagent/cache"
     cache_ttl: int = 3600
     
     secret_key: str

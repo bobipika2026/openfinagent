@@ -110,7 +110,7 @@
    ↓
 2. 阅读 [常见问题](faq.md)
    ↓
-3. 参与 [社区讨论](https://github.com/your-org/tradeflow-ai/discussions)
+3. 参与 [社区讨论](https://github.com/bobipika2026/openfinagent/discussions)
    ↓
 4. [贡献代码](../CONTRIBUTING.md)
 ```
@@ -148,9 +148,9 @@
 
 发现文档错误？有好的建议？欢迎贡献！
 
-- 🐛 报告问题：[GitHub Issues](https://github.com/your-org/tradeflow-ai/issues)
+- 🐛 报告问题：[GitHub Issues](https://github.com/bobipika2026/openfinagent/issues)
 - 📝 提交修改：[贡献指南](../CONTRIBUTING.md#文档贡献)
-- 💡 建议主题：[GitHub Discussions](https://github.com/your-org/tradeflow-ai/discussions)
+- 💡 建议主题：[GitHub Discussions](https://github.com/bobipika2026/openfinagent/discussions)
 
 ---
 
@@ -158,8 +158,8 @@
 
 - 🏠 项目主页：[README](../README.md)
 - 💻 示例代码：[examples/](../examples/)
-- 🐛 问题反馈：[GitHub Issues](https://github.com/your-org/tradeflow-ai/issues)
-- 💬 社区讨论：[GitHub Discussions](https://github.com/your-org/tradeflow-ai/discussions)
+- 🐛 问题反馈：[GitHub Issues](https://github.com/bobipika2026/openfinagent/issues)
+- 💬 社区讨论：[GitHub Discussions](https://github.com/bobipika2026/openfinagent/discussions)
 
 ---
 

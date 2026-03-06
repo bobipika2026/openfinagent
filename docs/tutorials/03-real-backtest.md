@@ -85,8 +85,8 @@ python -c "import yfinance as yf; print('yfinance OK')"
 使用真实 A 股数据进行回测
 """
 
-from tradeflow import StrategyBuilder, BacktestEngine
-from tradeflow.backtest.engine import load_data
+from openfinagent import StrategyBuilder, BacktestEngine
+from openfinagent.backtest.engine import load_data
 
 
 def main():
@@ -230,8 +230,8 @@ A 股代码格式：
 使用真实美股数据进行回测
 """
 
-from tradeflow import StrategyBuilder, BacktestEngine
-from tradeflow.backtest.engine import load_data
+from openfinagent import StrategyBuilder, BacktestEngine
+from openfinagent.backtest.engine import load_data
 
 
 def main():
@@ -342,8 +342,8 @@ python backtest_us_stock.py
 多股票对比回测
 """
 
-from tradeflow import StrategyBuilder, BacktestEngine
-from tradeflow.backtest.engine import load_data
+from openfinagent import StrategyBuilder, BacktestEngine
+from openfinagent.backtest.engine import load_data
 
 
 def backtest_single_stock(symbol, name, data_source='akshare'):

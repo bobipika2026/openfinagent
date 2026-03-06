@@ -51,8 +51,8 @@
 #### 代码实现
 
 ```python
-from tradeflow import StrategyBuilder, BacktestEngine
-from tradeflow.backtest.engine import load_data
+from openfinagent import StrategyBuilder, BacktestEngine
+from openfinagent.backtest.engine import load_data
 
 strategy = StrategyBuilder.from_natural_language("""
 当 5 日均线上穿 20 日均线时买入
@@ -160,7 +160,7 @@ strategies = [
 #### 策略逻辑
 
 ```python
-from tradeflow.strategy import BaseStrategy
+from openfinagent.strategy import BaseStrategy
 
 class SectorRotationStrategy(BaseStrategy):
     """
@@ -260,7 +260,7 @@ class SectorRotationStrategy(BaseStrategy):
 #### 策略实现
 
 ```python
-from tradeflow import StrategyBuilder, BacktestEngine
+from openfinagent import StrategyBuilder, BacktestEngine
 import yfinance as yf
 
 # 创建策略
@@ -349,9 +349,9 @@ for ticker in tickers:
 
 ### 提交方式
 
-1. **GitHub Issue**: 在 [GitHub Issues](https://github.com/your-org/tradeflow-ai/issues) 创建案例分享
-2. **邮件**: 发送至 showcase@tradeflow.ai
-3. **社区论坛**: 在 [社区论坛](https://community.tradeflow.ai) 发帖
+1. **GitHub Issue**: 在 [GitHub Issues](https://github.com/bobipika2026/openfinagent/issues) 创建案例分享
+2. **邮件**: 发送至 showcase@openfinagent.ai
+3. **社区论坛**: 在 [社区论坛](https://github.com/bobipika2026/openfinagent) 发帖
 
 ### 案例模板
 
@@ -391,7 +391,7 @@ for ticker in tickers:
 
 - 📖 [快速入门](getting_started.md) - 开始你的第一个策略
 - 🎓 [教程集合](tutorials/) - 深入学习
-- 💬 [社区论坛](https://community.tradeflow.ai) - 与其他用户交流
+- 💬 [社区论坛](https://github.com/bobipika2026/openfinagent) - 与其他用户交流
 
 ---
 

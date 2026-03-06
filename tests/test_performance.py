@@ -19,22 +19,22 @@ from datetime import datetime
 
 sys.path.insert(0, '../src')
 
-from tradeflow.strategy import (
+from openfinagent.strategy import (
     MACrossStrategy,
     RSIStrategy,
     MACDStrategy,
     BollingerStrategy
 )
-from tradeflow.backtest import (
+from openfinagent.backtest import (
     BacktestEngine,
     BatchBacktester,
     BatchBacktestConfig
 )
-from tradeflow.optimization.optimizer import (
+from openfinagent.optimization.optimizer import (
     StrategyOptimizer,
     ParameterRange
 )
-from tradeflow.data.sources import MockDataSource
+from openfinagent.data.sources import MockDataSource
 
 
 def generate_large_dataset(n_days=2000, n_stocks=50, seed=42):

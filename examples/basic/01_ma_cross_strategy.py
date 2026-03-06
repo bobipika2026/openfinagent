@@ -11,8 +11,8 @@
 import sys
 sys.path.insert(0, '../../src')
 
-from tradeflow import StrategyBuilder, BacktestEngine
-from tradeflow.backtest.engine import load_data
+from src import StrategyBuilder, BacktestEngine
+from src.backtest.engine import load_data
 
 
 def main():

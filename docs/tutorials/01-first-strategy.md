@@ -40,7 +40,7 @@
 
 ```bash
 # 验证 OpenFinAgent 是否安装成功
-python -c "from tradeflow import StrategyBuilder; print('✅ 安装成功！')"
+python -c "from openfinagent import StrategyBuilder; print('✅ 安装成功！')"
 ```
 
 如果看到 `✅ 安装成功！`，说明环境已就绪。
@@ -110,8 +110,8 @@ vim my_first_strategy.py   # Vim
 我的第一个量化策略 - 均线交叉策略
 """
 
-from tradeflow import StrategyBuilder, BacktestEngine
-from tradeflow.backtest.engine import load_data
+from openfinagent import StrategyBuilder, BacktestEngine
+from openfinagent.backtest.engine import load_data
 
 
 def main():
@@ -364,7 +364,7 @@ strategy = StrategyBuilder.from_natural_language("""
 ### 对比不同参数
 
 ```python
-from tradeflow import StrategyBuilder, BacktestEngine
+from openfinagent import StrategyBuilder, BacktestEngine
 
 # 创建多个策略
 strategies = {

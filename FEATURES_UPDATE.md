@@ -19,7 +19,7 @@
 基于相对强弱指数的超买超卖策略。
 
 ```python
-from tradeflow.strategy import RSIStrategy
+from openfinagent.strategy import RSIStrategy
 
 strategy = RSIStrategy(
     rsi_period=14,              # RSI 计算周期
@@ -42,7 +42,7 @@ strategy = RSIStrategy(
 基于 MACD 指标的金叉死叉策略。
 
 ```python
-from tradeflow.strategy import MACDStrategy
+from openfinagent.strategy import MACDStrategy
 
 strategy = MACDStrategy(
     fast_period=12,         # 快线周期
@@ -65,7 +65,7 @@ strategy = MACDStrategy(
 基于布林带的突破和均值回归策略。
 
 ```python
-from tradeflow.strategy import BollingerStrategy
+from openfinagent.strategy import BollingerStrategy
 
 # 均值回归模式
 strategy = BollingerStrategy(
@@ -88,7 +88,7 @@ strategy = BollingerStrategy(
 结合均线交叉和成交量确认的复合策略。
 
 ```python
-from tradeflow.strategy import DualMAVolumeStrategy
+from openfinagent.strategy import DualMAVolumeStrategy
 
 strategy = DualMAVolumeStrategy(
     short_window=5,             # 短期均线
@@ -113,7 +113,7 @@ strategy = DualMAVolumeStrategy(
 完整的交易风险管理系统。
 
 ```python
-from tradeflow.risk.control import RiskController, RiskLimits
+from openfinagent.risk.control import RiskController, RiskLimits
 
 # 配置风险限制
 limits = RiskLimits(
@@ -171,7 +171,7 @@ action = risk_controller.check_stop_loss_take_profit(
 网格搜索和参数敏感性分析工具。
 
 ```python
-from tradeflow.optimization.optimizer import StrategyOptimizer, ParameterRange
+from openfinagent.optimization.optimizer import StrategyOptimizer, ParameterRange
 
 # 创建优化器
 optimizer = StrategyOptimizer(
@@ -229,7 +229,7 @@ overfitting_metrics = optimizer.detect_overfitting()
 支持多股票批量回测。
 
 ```python
-from tradeflow.backtest import BatchBacktester, BatchBacktestConfig
+from openfinagent.backtest import BatchBacktester, BatchBacktestConfig
 
 # 配置批量回测
 config = BatchBacktestConfig(
@@ -261,7 +261,7 @@ batch_backtester.export_results('./batch_results')
 多策略对比回测。
 
 ```python
-from tradeflow.backtest import MultiStrategyBacktester
+from openfinagent.backtest import MultiStrategyBacktester
 
 strategies = [
     MACrossStrategy(short_window=5, long_window=20),
@@ -287,7 +287,7 @@ backtester.plot_comparison(save_path='./comparison.png')
 ### 支持的数据源
 
 ```python
-from tradeflow.data.sources import (
+from openfinagent.data.sources import (
     AkShareDataSource,      # A 股 (免费)
     YahooFinanceDataSource, # 美股/港股
     TushareDataSource,      # A 股 (需要 token)
@@ -411,11 +411,11 @@ pytest --cov=../src --cov-report=html
 ### 完整工作流程
 
 ```python
-from tradeflow.strategy import RSIStrategy, StrategyBuilder
-from tradeflow.backtest import BacktestEngine, BatchBacktester
-from tradeflow.optimization.optimizer import StrategyOptimizer
-from tradeflow.risk.control import RiskController
-from tradeflow.data.sources import load_data_from_source
+from openfinagent.strategy import RSIStrategy, StrategyBuilder
+from openfinagent.backtest import BacktestEngine, BatchBacktester
+from openfinagent.optimization.optimizer import StrategyOptimizer
+from openfinagent.risk.control import RiskController
+from openfinagent.data.sources import load_data_from_source
 
 # 1. 加载数据
 data = load_data_from_source(
@@ -462,7 +462,7 @@ strategy = StrategyBuilder.from_natural_language("""
 ## 📁 项目结构更新
 
 ```
-tradeflow-ai/
+openfinagent/
 ├── src/
 │   ├── strategy/
 │   │   ├── base.py              # 策略基类 (增强版)
