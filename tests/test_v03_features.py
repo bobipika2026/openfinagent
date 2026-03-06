@@ -231,20 +231,22 @@ def test_genetic_optimizer():
     # 创建简单测试策略
     class TestStrategy(BaseStrategy):
         def __init__(self, window=20, threshold=0.5, initial_capital=100000):
-            super().__init__(initial_capital=initial_capital)
+            super().__init__(name="TestStrategy", initial_capital=initial_capital)
             self.window = int(window)
             self.threshold = threshold
         
-        def generate_signals(self, data):
+        def generate_signals(self, data: pd.DataFrame) -> pd.Series:
+            """生成交易信号"""
             signals = np.zeros(len(data), dtype=np.int8)
             if len(data) > self.window:
                 ma = data['close'].rolling(self.window).mean()
                 signals[data['close'] > ma * (1 + self.threshold)] = 1
                 signals[data['close'] < ma * (1 - self.threshold)] = -1
-            return signals
+            return pd.Series(signals, index=data.index)
         
-        def on_bar(self, data, index):
-            """每根 K 线回调"""
+        def on_bar(self, data: pd.DataFrame, index: int) -> Optional[Dict[str, Any]]:
+            """每根 K 线回调 - 实现抽象方法"""
+            # 简单实现：不产生交易信号
             return None
     
     # 测试 3.1: 优化器初始化
@@ -375,20 +377,21 @@ def test_parameter_heatmap():
     # 创建测试策略
     class TestStrategy(BaseStrategy):
         def __init__(self, window=20, threshold=0.3, initial_capital=100000):
-            super().__init__(initial_capital=initial_capital)
+            super().__init__(name="TestStrategy", initial_capital=initial_capital)
             self.window = int(window)
             self.threshold = threshold
         
-        def generate_signals(self, data):
+        def generate_signals(self, data: pd.DataFrame) -> pd.Series:
+            """生成交易信号"""
             signals = np.zeros(len(data), dtype=np.int8)
             if len(data) > self.window:
                 ma = data['close'].rolling(self.window).mean()
                 signals[data['close'] > ma * (1 + self.threshold)] = 1
                 signals[data['close'] < ma * (1 - self.threshold)] = -1
-            return signals
+            return pd.Series(signals, index=data.index)
         
-        def on_bar(self, data, index):
-            """每根 K 线回调"""
+        def on_bar(self, data: pd.DataFrame, index: int) -> Optional[Dict[str, Any]]:
+            """每根 K 线回调 - 实现抽象方法"""
             return None
     
     # 测试 4.1: 热力图初始化
@@ -497,19 +500,20 @@ def test_optimized_engine():
     # 创建测试策略
     class TestStrategy(BaseStrategy):
         def __init__(self, window=20, initial_capital=100000):
-            super().__init__(initial_capital=initial_capital)
+            super().__init__(name="TestStrategy", initial_capital=initial_capital)
             self.window = window
         
-        def generate_signals(self, data):
+        def generate_signals(self, data: pd.DataFrame) -> pd.Series:
+            """生成交易信号"""
             signals = np.zeros(len(data), dtype=np.int8)
             if len(data) > self.window:
                 ma = data['close'].rolling(self.window).mean()
                 signals[data['close'] > ma] = 1
                 signals[data['close'] < ma] = -1
-            return signals
+            return pd.Series(signals, index=data.index)
         
-        def on_bar(self, data, index):
-            """每根 K 线回调"""
+        def on_bar(self, data: pd.DataFrame, index: int) -> Optional[Dict[str, Any]]:
+            """每根 K 线回调 - 实现抽象方法"""
             return None
     
     # 测试 5.1: 引擎初始化

@@ -136,9 +136,11 @@ class BinanceDataSource:
 
         all_klines = []
         current_start = start_ts
+        max_retries = 3
+        retry_count = 0
 
         # 分页获取数据
-        while current_start < end_ts:
+        while current_start < end_ts and retry_count < max_retries:
             params = {
                 'symbol': clean_symbol,
                 'interval': self.INTERVAL_MAP[interval],
@@ -147,13 +149,21 @@ class BinanceDataSource:
                 'limit': limit
             }
 
+            logger.debug(f"Binance API 请求参数：{params}")
             klines = self._make_request('/api/v3/klines', params)
 
-            if not klines or len(klines) == 0:
+            if not klines:
+                logger.warning(f"Binance API 返回空数据：{clean_symbol}, {interval}")
+                retry_count += 1
+                time.sleep(1.0)  # 重试前等待
+                continue
+
+            if len(klines) == 0:
                 logger.warning(f"Binance 无数据：{clean_symbol}, {interval}")
                 break
 
             all_klines.extend(klines)
+            logger.debug(f"获取到 {len(klines)} 条 K 线数据，累计 {len(all_klines)} 条")
 
             # 更新起始时间 (最后一条 K 线的时间 + 1ms)
             current_start = klines[-1][0] + 1
@@ -166,6 +176,7 @@ class BinanceDataSource:
             time.sleep(self.rate_limit_delay)
 
         if not all_klines:
+            logger.warning(f"Binance 最终未获取到任何数据：{clean_symbol}, {interval}")
             return pd.DataFrame()
 
         # 转换为 DataFrame

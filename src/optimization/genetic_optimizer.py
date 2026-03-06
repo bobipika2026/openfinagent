@@ -283,6 +283,7 @@ class GeneticOptimizer:
     def _update_best_individual(self):
         """更新最优个体"""
         if not self.population:
+            logger.warning("种群为空，无法更新最优个体")
             return
 
         # 按适应度排序
@@ -295,8 +296,15 @@ class GeneticOptimizer:
         current_best = sorted_pop[0]
 
         # 更新全局最优
-        if self.best_individual is None or current_best.fitness > self.best_individual.fitness:
+        if self.best_individual is None:
             self.best_individual = copy.deepcopy(current_best)
+            logger.info(f"初始化最优个体：fitness={current_best.fitness:.4f}, params={current_best.params}")
+        elif current_best.fitness > self.best_individual.fitness:
+            old_fitness = self.best_individual.fitness
+            self.best_individual = copy.deepcopy(current_best)
+            logger.info(f"更新最优个体：fitness 从 {old_fitness:.4f} 提升到 {current_best.fitness:.4f}")
+        else:
+            logger.debug(f"当前代最优 fitness={current_best.fitness:.4f}, 未超过全局最优 {self.best_individual.fitness:.4f}")
 
         # 记录所有个体
         self.all_individuals.extend(copy.deepcopy(self.population))
@@ -309,13 +317,20 @@ class GeneticOptimizer:
         fitness_values = [i.fitness for i in self.population if np.isfinite(i.fitness)]
 
         if not fitness_values:
-            return {}
+            # 如果所有适应度都是 inf/-inf，仍然返回统计信息
+            all_fitness = [i.fitness for i in self.population]
+            return {
+                'best_fitness': max(all_fitness) if all_fitness else 0.0,
+                'avg_fitness': 0.0,  # 无法计算平均值时返回 0
+                'min_fitness': min(all_fitness) if all_fitness else 0.0,
+                'std_fitness': 0.0
+            }
 
         return {
             'best_fitness': max(fitness_values),
-            'avg_fitness': np.mean(fitness_values),
+            'avg_fitness': float(np.mean(fitness_values)),  # 确保返回 Python float
             'min_fitness': min(fitness_values),
-            'std_fitness': np.std(fitness_values)
+            'std_fitness': float(np.std(fitness_values))
         }
 
     def _evolve_population(self) -> List[Individual]:
