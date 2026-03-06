@@ -1,0 +1,16 @@
+# MkDocs 核心
+mkdocs>=1.5.0
+mkdocs-material>=9.5.0
+
+# 扩展插件
+mkdocs-git-revision-date-localized-plugin>=1.2.0
+mkdocs-minify-plugin>=0.7.0
+mkdocs-glightbox>=0.3.0
+mkdocs-mermaid2-plugin>=1.1.0
+
+# 代码高亮
+Pygments>=2.17.0
+pymdown-extensions>=10.4.0
+
+# 其他工具
+mike>=2.0.0  # 版本管理

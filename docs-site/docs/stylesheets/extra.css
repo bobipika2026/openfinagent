@@ -1,0 +1,149 @@
+/* 自定义样式 - OpenFinAgent 文档站点 */
+
+/* 代码块样式优化 */
+.md-typeset pre > code {
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 表格样式优化 */
+.md-typeset table:not([class]) {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.md-typeset table:not([class]) th {
+    background-color: var(--md-primary-fg-color--light);
+    color: var(--md-primary-bg-color);
+}
+
+/* 提示框样式 */
+.md-typeset .admonition {
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 卡片网格样式 */
+.md-typeset .grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.md-typeset .grid .card {
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: var(--md-default-fg-color--lightest);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.md-typeset .grid .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 代码高亮优化 */
+.highlight .c1 {
+    color: #6a9955;
+    font-style: italic;
+}
+
+.highlight .k {
+    color: #569cd6;
+}
+
+.highlight .s {
+    color: #ce9178;
+}
+
+.highlight .n {
+    color: #dcdcaa;
+}
+
+/* 深色模式优化 */
+[data-md-color-scheme="slate"] {
+    --md-default-bg-color: #1e1e1e;
+    --md-default-fg-color: #ffffff;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .grid .card {
+    background-color: #2d2d2d;
+}
+
+/* 导航栏优化 */
+.md-header {
+    background: linear-gradient(90deg, #3f51b5, #5c6bc0);
+}
+
+/* 侧边栏优化 */
+.md-nav__item--section > .md-nav__link[for] {
+    color: var(--md-primary-fg-color);
+    font-weight: 600;
+}
+
+/* 搜索框优化 */
+.md-search__input {
+    background-color: var(--md-default-fg-color--lighter);
+}
+
+/* 页脚样式 */
+.md-footer {
+    background-color: #1a1a2e;
+}
+
+/* 响应式优化 */
+@media screen and (max-width: 768px) {
+    .md-typeset .grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .md-typeset pre > code {
+        font-size: 12px;
+    }
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.md-main__inner {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* 图表容器 */
+.mermaid {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+/* 徽章样式 */
+.md-badge {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+}
+
+.md-badge--info {
+    background-color: #2196f3;
+    color: white;
+}
+
+.md-badge--warning {
+    background-color: #ff9800;
+    color: white;
+}
+
+.md-badge--success {
+    background-color: #4caf50;
+    color: white;
+}

@@ -1,0 +1,57 @@
+name: Deploy Docs
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs-site/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'docs-site/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      
+      - name: Install dependencies
+        run: |
+          cd docs-site
+          pip install -r requirements.txt
+      
+      - name: Build documentation
+        run: |
+          cd docs-site
+          mkdocs build --clean
+      
+      - name: Deploy to GitHub Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs-site/site
+          publish_branch: gh-pages
+          force_orphan: true
+          cname: ''  # 如有自定义域名，在此填写
+      
+      - name: Upload artifacts
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentation-preview
+          path: ./docs-site/site
+          retention-days: 7

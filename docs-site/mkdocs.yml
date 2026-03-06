@@ -1,0 +1,134 @@
+site_name: OpenFinAgent
+site_description: AI 量化交易平台 - 智能交易策略与自动化投资系统
+site_author: OpenFinAgent Team
+site_url: https://bobipika2026.github.io/openfinagent
+
+# 仓库配置
+repo_name: bobipika2026/openfinagent
+repo_url: https://github.com/bobipika2026/openfinagent
+edit_uri: blob/main/docs-site/docs/
+
+# 主题配置 - Material for MkDocs
+theme:
+  name: material
+  language: zh
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 切换到深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 切换到浅色模式
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+    - content.code.select
+  icon:
+    repo: fontawesome/brands/github
+
+# 搜索配置
+extra:
+  search:
+    language: zh
+
+# 扩展配置
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - fenced_code
+  - footnotes
+  - meta
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: bobipika2026
+      repo: openfinagent
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+# 导航结构
+nav:
+  - 首页: index.md
+  - 快速开始: getting-started.md
+  - 策略文档:
+    - strategies/index.md
+    - 双均线策略: strategies/dual-ma.md
+    - 动量策略: strategies/momentum.md
+    - 均值回归策略: strategies/mean-reversion.md
+    - 网格交易策略: strategies/grid-trading.md
+    - 机器学习策略: strategies/ml-strategy.md
+    - 深度学习策略: strategies/deep-learning.md
+  - API 参考:
+    - api/index.md
+    - 交易接口: api/trading.md
+    - 数据接口: api/data.md
+    - 策略接口: api/strategy.md
+  - 教程:
+    - tutorials/index.md
+    - 第一个策略: tutorials/first-strategy.md
+    - 回测实战: tutorials/backtesting.md
+    - 实盘部署: tutorials/live-trading.md
+  - FAQ: faq.md
+
+# 自定义 CSS
+extra_css:
+  - stylesheets/extra.css
+
+# 构建配置
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+
+# GitHub Pages 部署配置
+plugins:
+  - search:
+      lang: zh

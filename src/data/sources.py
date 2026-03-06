@@ -197,17 +197,24 @@ class TushareDataSource(DataSource):
     Tushare 数据源 (A 股)
 
     需要 API token，可在 tushare.pro 注册获取
+    支持日线、分钟线数据
     """
 
-    def __init__(self, token: Optional[str] = None):
+    def __init__(
+        self,
+        token: Optional[str] = None,
+        freq: str = 'D'
+    ):
         """
         初始化
 
         Args:
             token: Tushare API token
+            freq: 数据频率 ('D'=日线，'1m'=1 分钟，'5m'=5 分钟等)
         """
         import os
         self.token = token or os.getenv('TUSHARE_TOKEN')
+        self.freq = freq
 
         if not self.token:
             raise ValueError(
@@ -242,14 +249,21 @@ class TushareDataSource(DataSource):
             start = start_date.replace('-', '')
             end = end_date.replace('-', '')
 
-            logger.info(f"从 Tushare 获取数据：{symbol}")
+            logger.info(f"从 Tushare 获取数据：{symbol}, 频率={self.freq}")
 
-            # 获取日线数据
-            df = pro.daily(
-                ts_code=symbol,
-                start_date=start,
-                end_date=end
-            )
+            # 根据频率选择 API
+            if self.freq == 'D':
+                # 日线数据
+                df = pro.daily(
+                    ts_code=symbol,
+                    start_date=start,
+                    end_date=end
+                )
+            elif self.freq in ['1m', '5m', '15m', '30m', '60m']:
+                # 分钟线数据
+                df = self._get_min_data(pro, symbol, start, end)
+            else:
+                raise ValueError(f"不支持的频率：{self.freq}")
 
             if df.empty:
                 logger.warning(f"Tushare 无数据：{symbol}")
@@ -258,6 +272,7 @@ class TushareDataSource(DataSource):
             # 重命名列
             df = df.rename(columns={
                 'trade_date': 'date',
+                'trade_time': 'time',
                 'open': 'open',
                 'high': 'high',
                 'low': 'low',
@@ -267,8 +282,15 @@ class TushareDataSource(DataSource):
             })
 
             # 转换日期
-            df['date'] = pd.to_datetime(df['date'])
-            df.set_index('date', inplace=True)
+            if 'date' in df.columns:
+                df['date'] = pd.to_datetime(df['date'])
+                if 'time' in df.columns:
+                    # 分钟线需要合并日期和时间
+                    df['datetime'] = df['date'].dt.strftime('%Y-%m-%d') + ' ' + df['time']
+                    df['datetime'] = pd.to_datetime(df['datetime'])
+                    df.set_index('datetime', inplace=True)
+                else:
+                    df.set_index('date', inplace=True)
 
             # 选择 OHLCV 列
             columns = ['open', 'high', 'low', 'close', 'volume']
@@ -283,6 +305,46 @@ class TushareDataSource(DataSource):
         except Exception as e:
             logger.error(f"Tushare 数据获取失败：{e}")
             raise
+
+    def _get_min_data(
+        self,
+        pro: Any,
+        symbol: str,
+        start_date: str,
+        end_date: str
+    ) -> pd.DataFrame:
+        """
+        获取分钟线数据
+
+        Args:
+            pro: Tushare pro API 实例
+            symbol: 股票代码
+            start_date: 开始日期
+            end_date: 结束日期
+
+        Returns:
+            分钟线 DataFrame
+        """
+        # 映射频率到 Tushare 周期
+        freq_map = {
+            '1m': '1',
+            '5m': '5',
+            '15m': '15',
+            '30m': '30',
+            '60m': '60'
+        }
+
+        ts_freq = freq_map.get(self.freq, '5')
+
+        # 获取分钟线数据
+        df = pro.bar(
+            ts_code=symbol,
+            freq=ts_freq,
+            start_date=start_date,
+            end_date=end_date
+        )
+
+        return df
 
 
 class CSVDataSource(DataSource):
