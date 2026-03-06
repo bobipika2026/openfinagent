@@ -281,7 +281,7 @@ def show_rsi_params():
             value=70
         )
     
-    return {'period': period, 'oversold': oversold, 'overbought': overbought}
+    return {'rsi_period': period, 'oversold_threshold': oversold, 'overbought_threshold': overbought}
 
 
 def show_macd_params():
@@ -340,7 +340,7 @@ def show_bollinger_params():
             step=0.1
         )
     
-    return {'window': window, 'std_dev': std_dev}
+    return {'window': window, 'num_std': std_dev}
 
 
 def show_dual_ma_volume_params():
@@ -389,7 +389,7 @@ def show_dual_ma_volume_params():
     return {
         'short_window': short_window,
         'long_window': long_window,
-        'volume_ma_period': volume_ma_period,
+        'volume_window': volume_ma_period,
         'volume_multiplier': volume_multiplier
     }
 

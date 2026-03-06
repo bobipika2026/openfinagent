@@ -149,10 +149,10 @@ def run_comparison(symbol, start_date, end_date, data_source):
             'ma_cross_5_20': ('均线交叉 (5,20)', {'strategy_type': 'ma_cross', 'short_window': 5, 'long_window': 20}),
             'ma_cross_10_50': ('均线交叉 (10,50)', {'strategy_type': 'ma_cross', 'short_window': 10, 'long_window': 50}),
             'momentum_20_5': ('动量策略 (20 日，5%)', {'strategy_type': 'momentum', 'lookback_period': 20, 'threshold': 0.05}),
-            'rsi_14_30_70': ('RSI 策略 (14,30,70)', {'strategy_type': 'rsi', 'period': 14, 'oversold': 30, 'overbought': 70}),
+            'rsi_14_30_70': ('RSI 策略 (14,30,70)', {'strategy_type': 'rsi', 'rsi_period': 14, 'oversold_threshold': 30, 'overbought_threshold': 70}),
             'macd_12_26_9': ('MACD 策略 (12,26,9)', {'strategy_type': 'macd', 'fast_period': 12, 'slow_period': 26, 'signal_period': 9}),
-            'bollinger_20_2': ('布林带 (20,2)', {'strategy_type': 'bollinger', 'window': 20, 'std_dev': 2.0}),
-            'dual_ma_vol': ('双均线 + 成交量', {'strategy_type': 'dual_ma_volume', 'short_window': 5, 'long_window': 20, 'volume_ma_period': 20, 'volume_multiplier': 1.5})
+            'bollinger_20_2': ('布林带 (20,2)', {'strategy_type': 'bollinger', 'window': 20, 'num_std': 2.0}),
+            'dual_ma_vol': ('双均线 + 成交量', {'strategy_type': 'dual_ma_volume', 'short_window': 5, 'long_window': 20, 'volume_window': 20, 'volume_multiplier': 1.5})
         }
         
         selected_strategies = st.multiselect(

@@ -8,8 +8,12 @@ from typing import Optional, Dict
 from datetime import datetime
 from tqdm import tqdm
 
-from backtest.results import BacktestResults
-from strategy.base import BaseStrategy
+try:
+    from .results import BacktestResults
+    from ..strategy.base import BaseStrategy
+except ImportError:
+    from backtest.results import BacktestResults
+    from strategy.base import BaseStrategy
 
 
 class BacktestEngine:
