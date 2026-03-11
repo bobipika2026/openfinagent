@@ -119,11 +119,18 @@ def show_create_strategy():
                 key="factory_end_date"
             )
     
-    # 创建按钮
+    # 创建按钮和自动回测选项
+    auto_backtest = st.checkbox(
+        "✅ 创建后自动回测",
+        value=False,
+        help="勾选后，策略创建完成后会自动运行回测",
+        key="factory_auto_backtest"
+    )
+    
     col1, col2, col3 = st.columns([2, 1, 1])
     with col1:
         create_button = st.button(
-            "🚀 创建策略",
+            "🚀 创建策略" + (" + 回测" if auto_backtest else ""),
             type="primary",
             use_container_width=True,
             key="factory_create"
@@ -143,7 +150,12 @@ def show_create_strategy():
     
     # 处理创建
     if create_button and strategy_description:
-        create_strategy_from_text(strategy_description, initial_capital, symbol)
+        create_strategy_from_text(
+            strategy_description,
+            auto_backtest=auto_backtest,
+            initial_capital=initial_capital,
+            symbol=symbol
+        )
 
 
 def create_strategy_from_text(description, initial_capital, symbol):
