@@ -161,7 +161,7 @@ def create_strategy_from_text(description, initial_capital, symbol):
             
             # 保存到 session state
             st.session_state.current_strategy = result
-            st.session_state.current_strategy['created_at'] = datetime.now()
+            st.session_state.current_strategy.created_at = datetime.now()
             
             st.success("✅ 策略创建成功！回测功能修复中...")
             st.info("💡 策略已保存到策略库，可以手动运行回测")
@@ -347,8 +347,9 @@ def show_storage_status():
     
     if stored:
         st.success("✅ 策略已入库")
-        st.markdown(f"**入库时间**: {strategy.created_at if hasattr(strategy, 'created_at') else 'N/A'}")
-        st.markdown(f"**库中 ID**: {strategy.id if hasattr(strategy, 'id') else 'N/A'}")
+        stored_at = st.session_state.get('strategy_stored_at', strategy.created_at)
+        st.markdown(f"**入库时间**: {stored_at.strftime('%Y-%m-%d %H:%M:%S') if stored_at else 'N/A'}")
+        st.markdown(f"**库中 ID**: {strategy.id or 'N/A'}")
     else:
         st.warning("⚠️ 策略尚未入库")
         
@@ -356,9 +357,9 @@ def show_storage_status():
         if st.button("📥 保存到策略库", type="primary", key="storage_save"):
             # TODO: 调用入库 API
             try:
-                # 模拟入库
-                st.session_state.current_strategy['stored'] = True
-                st.session_state.current_strategy['stored_at'] = datetime.now()
+                # 模拟入库 - 使用 session_state 存储状态
+                st.session_state.strategy_stored = True
+                st.session_state.strategy_stored_at = datetime.now()
                 st.success("✅ 策略已成功入库")
                 st.rerun()
             except Exception as e:
