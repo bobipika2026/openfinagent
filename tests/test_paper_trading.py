@@ -274,6 +274,8 @@ class TestPaperTradingEngine:
         # 验证持仓盈亏更新
         position = engine.get_position('AAPL')
         assert position.current_price == 200.0
+        # unrealized_pnl 现在是动态计算的
+        assert position.unrealized_pnl > 0
     
     def test_multiple_positions(self, engine):
         """测试多个持仓"""

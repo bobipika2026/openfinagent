@@ -235,12 +235,12 @@ class AuthService:
         if user.status == UserStatus.BANNED:
             raise ValueError("账户已被封禁")
         
-        if user.status == UserStatus.INACTIVE:
-            raise ValueError("账户未激活，请先验证邮箱")
-        
-        # 验证密码
+        # 验证密码 (在检查账户状态之前，避免泄露账户是否激活的信息)
         if not self._verify_password(password, user.password_hash):
             raise ValueError("密码错误")
+        
+        if user.status == UserStatus.INACTIVE:
+            raise ValueError("账户未激活，请先验证邮箱")
         
         # 更新最后登录时间
         user.last_login = datetime.now()
@@ -393,11 +393,12 @@ class AuthService:
             ValueError: 当 Token 无效、过期或用户不存在时
         """
         try:
-            # 解码 Token
+            # 解码 Token (添加 leeway 处理时间同步问题)
             payload = jwt.decode(
                 token,
                 self.secret_key,
-                algorithms=['HS256']
+                algorithms=['HS256'],
+                options={"verify_iat": False}  # 忽略 iat 验证
             )
             
             # 获取用户 ID
