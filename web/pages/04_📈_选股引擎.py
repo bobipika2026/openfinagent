@@ -80,7 +80,7 @@ def show_strategy_selector():
     
     # 策略选择
     if strategies:
-        strategy_options = {f"{s.get('name', '未命名')} ({s.get('id', 'N/A')})": s for s in strategies}
+        strategy_options = {f"{s.name or '', '未命名')} ({s.id or None, 'N/A')})": s for s in strategies}
         selected_name = st.selectbox(
             "选择策略",
             options=list(strategy_options.keys()),
@@ -90,7 +90,7 @@ def show_strategy_selector():
         
         # 显示策略详情
         with st.expander("📋 查看策略详情", expanded=False):
-            st.markdown(f"**策略 ID**: {selected_strategy.get('id', 'N/A')}")
+            st.markdown(f"**策略 ID**: {selected_strategy.id or None, 'N/A')}")
             st.markdown(f"**创建时间**: {selected_strategy.get('created_at', 'N/A')}")
             
             if selected_strategy.get('backtest_result'):
@@ -153,7 +153,7 @@ def show_condition_config():
         st.warning("⚠️ 请先选择策略")
         return
     
-    st.markdown(f"**当前策略**: {st.session_state.selected_strategy.get('name', '未命名')}")
+    st.markdown(f"**当前策略**: {st.session_state.selected_strategy.name or '', '未命名')}")
     st.markdown(f"**市场**: {st.session_state.selected_market}")
     
     st.divider()
@@ -237,7 +237,7 @@ def run_stock_selection(conditions):
             
             selector = StockSelector()
             result = selector.select_stocks(
-                strategy_id=st.session_state.selected_strategy.get('id'),
+                strategy_id=st.session_state.selected_strategy.id or None),
                 conditions=conditions,
                 market=st.session_state.selected_market
             )
@@ -509,7 +509,7 @@ def show_stock_pool():
     st.markdown("### 📚 股票池列表")
     
     for i, pool in enumerate(pools, 1):
-        with st.expander(f"📊 {pool.get('name', '未命名')} - {pool.get('stock_count', 0)}只股票", expanded=False):
+        with st.expander(f"📊 {pool.name or '', '未命名')} - {pool.get('stock_count', 0)}只股票", expanded=False):
             st.markdown(f"**创建时间**: {pool.get('created_at', 'N/A')}")
             st.markdown(f"**更新时间**: {pool.get('updated_at', 'N/A')}")
             
@@ -537,7 +537,7 @@ def show_stock_pool():
         st.markdown("### 📋 股票池详情")
         pool = st.session_state.current_pool
         
-        st.markdown(f"**名称**: {pool.get('name', '未命名')}")
+        st.markdown(f"**名称**: {pool.name or '', '未命名')}")
         st.markdown(f"**ID**: {pool.get('pool_id', 'N/A')}")
         st.markdown(f"**股票数量**: {pool.get('stock_count', 0)}")
         
@@ -560,7 +560,7 @@ def export_stock_pool(pool):
         st.download_button(
             label="📥 下载 CSV",
             data=csv,
-            file_name=f"{pool.get('name', 'stock_pool')}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
+            file_name=f"{pool.name or '', 'stock_pool')}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
             mime="text/csv"
         )
     except Exception as e:

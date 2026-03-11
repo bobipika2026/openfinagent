@@ -128,7 +128,7 @@ def show_monitoring_tasks():
             pass
         
         if strategies:
-            strategy_options = {f"{s.get('name', '未命名')} ({s.get('id', 'N/A')})": s.get('id') for s in strategies}
+            strategy_options = {f"{s.name or '', '未命名')} ({s.id or None, 'N/A')})": s.id or None) for s in strategies}
             selected_strategy = st.selectbox("选择策略", options=list(strategy_options.keys()), key="new_task_strategy")
             strategy_id = strategy_options[selected_strategy]
         else:

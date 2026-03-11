@@ -206,18 +206,18 @@ def show_strategy_preview():
     # 策略基本信息
     col1, col2 = st.columns(2)
     with col1:
-        st.markdown(f"**策略名称**: {strategy.get('name', '未命名')}")
-        st.markdown(f"**策略 ID**: {strategy.get('id', 'N/A')}")
+        st.markdown(f"**策略名称**: {strategy.name or '未命名'}")
+        st.markdown(f"**策略 ID**: {strategy.id or 'N/A'}")
     with col2:
-        st.markdown(f"**创建时间**: {strategy.get('created_at', 'N/A')}")
-        st.markdown(f"**状态**: {'✅ 已回测' if strategy.get('backtest_result') else '⏳ 待回测'}")
+        st.markdown(f"**创建时间**: {strategy.created_at or 'N/A'}")
+        st.markdown(f"**状态**: {'✅ 已回测' if strategy.backtest_report else '⏳ 待回测'}")
     
     st.divider()
     
     # 策略代码预览
     st.markdown("### 💻 策略代码")
     
-    code = strategy.get('code', '# 策略代码生成中...')
+    code = strategy.code or '# 策略代码生成中...'
     st.code(code, language='python', line_numbers=True)
     
     # 编辑按钮
@@ -253,7 +253,7 @@ def show_backtest_results():
         return
     
     strategy = st.session_state.current_strategy
-    backtest_result = strategy.get('backtest_result')
+    backtest_result = strategy.backtest_report
     
     if not backtest_result:
         # 空状态优化 - 策略已创建但未回测
@@ -343,12 +343,12 @@ def show_storage_status():
     strategy = st.session_state.current_strategy
     
     # 入库状态
-    stored = strategy.get('stored', False)
+    stored = hasattr(strategy, 'stored') and strategy.stored
     
     if stored:
         st.success("✅ 策略已入库")
-        st.markdown(f"**入库时间**: {strategy.get('stored_at', 'N/A')}")
-        st.markdown(f"**库中 ID**: {strategy.get('library_id', 'N/A')}")
+        st.markdown(f"**入库时间**: {strategy.created_at if hasattr(strategy, 'created_at') else 'N/A'}")
+        st.markdown(f"**库中 ID**: {strategy.id if hasattr(strategy, 'id') else 'N/A'}")
     else:
         st.warning("⚠️ 策略尚未入库")
         
@@ -376,9 +376,9 @@ def show_storage_status():
         
         if library:
             for i, strat in enumerate(library, 1):
-                with st.expander(f"📊 {strat.get('name', '未命名')} - {strat.get('id', 'N/A')}", expanded=False):
-                    st.markdown(f"**创建时间**: {strat.get('created_at', 'N/A')}")
-                    st.markdown(f"**回测状态**: {'✅ 已回测' if strat.get('backtest_result') else '⏳ 未回测'}")
+                with st.expander(f"📊 {strat.name or '未命名'} - {strat.id or 'N/A'}", expanded=False):
+                    st.markdown(f"**创建时间**: {strat.created_at or 'N/A'}")
+                    st.markdown(f"**回测状态**: {'✅ 已回测' if strat.backtest_report else '⏳ 未回测'}")
                     
                     col1, col2 = st.columns(2)
                     with col1:
