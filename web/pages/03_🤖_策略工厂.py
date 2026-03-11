@@ -150,21 +150,21 @@ def create_strategy_from_text(description, initial_capital, symbol):
     """从文本创建策略"""
     with st.spinner("🤖 AI 正在生成策略..."):
         try:
-            # TODO: 调用真实 API
             from src.strategy_factory import StrategyFactory
             
             factory = StrategyFactory()
+            # 暂时禁用自动回测，避免动态加载问题
             result = factory.create_from_natural_language(
                 description=description,
-                initial_capital=initial_capital,
-                auto_backtest=True
+                auto_backtest=False  # 暂时禁用
             )
             
             # 保存到 session state
             st.session_state.current_strategy = result
             st.session_state.current_strategy['created_at'] = datetime.now()
             
-            st.success("✅ 策略创建成功！")
+            st.success("✅ 策略创建成功！回测功能修复中...")
+            st.info("💡 策略已保存到策略库，可以手动运行回测")
             st.rerun()
             
         except Exception as e:
